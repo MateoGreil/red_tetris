@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import redTetrisApp from './reducers/reducers'
+import io from 'socket.io-client'
 
 const store = createStore(redTetrisApp)
+const socket = io('192.168.1.123:8000')
 
 ReactDOM.render(
   <Provider store={store}>

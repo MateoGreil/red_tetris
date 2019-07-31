@@ -13,9 +13,7 @@ services:
     build: ./server
     volumes:
       - ./server/main.js:/opt/red_tetris/server/main.js
-      - ./server/Game.js:/opt/red_tetris/server/Game.js
-      - ./server/Player.js:/opt/red_tetris/server/Player.js
-      - ./server/Piece.js:/opt/red_tetris/server/Piece.js
+      - ./server/src:/opt/red_tetris/server/src
 
   client:
     image: "mgreil/red_tetris_client"

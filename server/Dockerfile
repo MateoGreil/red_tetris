@@ -10,10 +10,7 @@ WORKDIR /opt/red_tetris/server
 
 # install and cache app dependencies
 COPY package.json /opt/red_tetris/server/package.json
-COPY main.js /opt/red_tetris/server/main.js
-COPY Game.js /opt/red_tetris/server/Game.js
-COPY Player.js /opt/red_tetris/server/Player.js
-COPY Piece.js /opt/red_tetris/server/main.js
+COPY src /opt/red_tetris/server/src
 
 RUN npm install --silent
 
