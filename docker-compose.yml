@@ -1,0 +1,34 @@
+
+version: '3'
+
+services:
+
+  server:
+    image: "mgreil/red_tetris_server"
+    restart: always
+    ports:
+      - "8000:8000"
+    networks:
+      - "web_network"
+    build: ./server
+    volumes:
+      - ./server/main.js:/opt/red_tetris/server/main.js
+      - ./server/Game.js:/opt/red_tetris/server/Game.js
+      - ./server/Player.js:/opt/red_tetris/server/Player.js
+      - ./server/Piece.js:/opt/red_tetris/server/Piece.js
+
+  client:
+    image: "mgreil/red_tetris_client"
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - "web_network"
+    build: ./client
+    volumes:
+      - ./client/public:/opt/red_tetris/client/public
+      - ./client/src:/opt/red_tetris/client/src
+
+networks:
+  web_network:
+    driver: bridge
