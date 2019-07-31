@@ -1,5 +1,5 @@
 
-import { MOVE, Direction } from '../actions/actions'
+import { MOVE, Direction } from '../actions/move'
 import tetriminos from '../components/Tetriminos/Tetriminos';
 
 const { RIGHT, LEFT, DOWN } = Direction

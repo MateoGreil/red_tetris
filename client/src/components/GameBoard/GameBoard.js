@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Row from '../Rows/Row'
 import './GameBoard.css'
-import { Direction } from '../../actions/actions'
+import { Direction } from '../../actions/move'
 
 const { RIGHT, LEFT, DOWN } = Direction
 

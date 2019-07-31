@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
-import { move } from '../actions/actions'
+import { move } from '../actions/move'
 import GameBoard from '../components/GameBoard/GameBoard'
 
 const mapStateToProps = state => ({
