@@ -5,10 +5,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import redTetrisApp from './reducers/reducers'
 import io from 'socket.io-client'
+import redTetrisReducers from './reducers/redTetrisReducers';
 
-const store = createStore(redTetrisApp)
+const store = createStore(redTetrisReducers)
 const socket = io('192.168.1.123:8000')
 
 ReactDOM.render(

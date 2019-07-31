@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux'
 
 import { MOVE, Direction } from '../actions/actions'
 import tetriminos from '../components/Tetriminos/Tetriminos';
@@ -69,7 +68,7 @@ function goDown(state) {
   return {tetrimino: tetrimino, array: state.provisionalArray.map(row => row.map(value => {return value})), provisionalArray: state.provisionalArray}
 }
 
-function move(state = {
+export default function move(state = {
   tetrimino: tetriminos[1],
   array: [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -132,9 +131,3 @@ function move(state = {
       return state
   }
 }
-
-const redTetrisApp = combineReducers({
-  move
-})
-
-export default redTetrisApp
