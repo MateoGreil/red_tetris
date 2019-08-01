@@ -2,6 +2,8 @@ import React from 'react'
 import { tetriminos, colors } from '../Tetriminos/Tetriminos.js'
 import './Row.css'
 
+
+//TODO: commenter et modifier ca... c'est dego.
 function Row(props) {
     var row = props.row
     var uiRow = [];
