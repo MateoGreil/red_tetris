@@ -63,7 +63,7 @@ function GameBoard({ board, move }) {
         **  map est un fonction d'iteration : permet de retourner tous les elements d'une chaine.
         **  ici, en precisant qu'on lui appliquera une transformation.
         **  map retourne (row, i), et j'applique a cela la fonction fleché, donc retourne finalement
-        **  un <Row/>
+        **  un <Row/>. C'est la facon propre de faire ce que j'ai fait tres salement dans Row.js.
         */
 
         board.map((row, i) => <Row row={row} key={i}/>)
