@@ -38,9 +38,9 @@ function goRight(state) {
 
   if (!check) {
       tetrimino.position.x++;
-      return {tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
+      return {...state, tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
   }
-  return {tetrimino: tetrimino, array: array, provisionalArray: state.provisionalArray, tetrimino};
+  return {...state, tetrimino: tetrimino, array: array, provisionalArray: state.provisionalArray, tetrimino};
 }
 
 function goLeft(state) {
@@ -49,9 +49,9 @@ function goLeft(state) {
   const check = checkCollision(tetrimino, array, {x: -1, y: 0});
   if (!check) {
       tetrimino.position.x--;
-      return {tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
+      return {...state, tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
   }
-  return {tetrimino: tetrimino, array: array, provisionalArray: state.provisionalArray, tetrimino};
+  return {...state, tetrimino: tetrimino, array: array, provisionalArray: state.provisionalArray, tetrimino};
 }
 
 function goDown(state) {
@@ -61,11 +61,11 @@ function goDown(state) {
   const check = checkCollision(tetrimino, array, {x: 0, y: 1});
   if (!check) {
     tetrimino.position.y++;
-    return {tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
+    return {...state, tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
   }
   tetrimino.position.y = 0;
   tetrimino.position.x = 3;
-  return {tetrimino: tetrimino, array: state.provisionalArray.map(row => row.map(value => {return value})), provisionalArray: state.provisionalArray}
+  return {...state, tetrimino: tetrimino, array: state.provisionalArray.map(row => row.map(value => {return value})), provisionalArray: state.provisionalArray}
 }
 
 export default function move(state = {

@@ -4,12 +4,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import io from 'socket.io-client'
 import redTetrisReducers from './reducers/redTetrisReducers';
+import redTetrisMiddleware from './middlewares/socketMiddleware';
 
-const store = createStore(redTetrisReducers)
-const socket = io('192.168.1.123:8000')
+const store = createStore(redTetrisReducers, applyMiddleware(redTetrisMiddleware))
 
 ReactDOM.render(
   <Provider store={store}>

@@ -18,7 +18,7 @@ function roomFrom(referer) {
 
 //connexion au client
 io.sockets.on('connection', function(client) {
-  //console.log(client)
+  console.log(client)
   // var player = new Player(usernameFrom(client.request.headers.referer), roomFrom(client.request.headers.referer), client);
   
   // if (!games[player.gameName]) {
