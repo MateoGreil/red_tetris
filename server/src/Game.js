@@ -1,9 +1,12 @@
+Piece = require('./Piece')
+
 class Game {
 
     constructor(p1) {
         this.name = p1.gameName;
         this.p1 = p1;
         this.players = [p1];
+        this.pieces = [new Piece]
         p1.id = 0;
     }
 

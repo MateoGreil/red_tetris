@@ -1,7 +1,6 @@
 import io from 'socket.io-client';
  
-const SERVER_ADDRESS = 'localhost:8000',
-      CONNECT_TO_GAME = 'connectToGame'
+const SERVER_ADDRESS = 'localhost:8000'
 
 function catchNamesFrom(hash) {
   var username = hash.split('[')[1].split(']')[0]

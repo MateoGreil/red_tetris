@@ -1,3 +1,13 @@
-export default class Piece {
-    
+const {
+  1:  [
+    []
+  ]
 }
+
+class Piece {    
+  constructor() {
+
+  }
+}
+
+module.exports = Piece
