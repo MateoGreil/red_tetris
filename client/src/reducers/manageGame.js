@@ -4,7 +4,7 @@ import { MANAGE_GAME, Options } from '../actions/manageGame'
 const { START } = Options
 
 function start(state) {
-  
+  console.log("STARTING GAME!")
 }
 
 
