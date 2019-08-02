@@ -8,8 +8,13 @@ import { createStore, applyMiddleware } from 'redux'
 import io from 'socket.io-client'
 import redTetrisReducers from './reducers/redTetrisReducers';
 import redTetrisMiddleware from './middlewares/socketMiddleware';
+import connectToServer from './connectToServer'
 
 const store = createStore(redTetrisReducers, applyMiddleware(redTetrisMiddleware))
+
+if (document.location.hash) {
+  connectToServer(store, document.location.hash)
+}
 
 ReactDOM.render(
   <Provider store={store}>
