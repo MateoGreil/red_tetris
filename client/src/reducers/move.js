@@ -65,11 +65,11 @@ function goRight(state) {
   //  s'il n'y a pas de collision, alors retourne le nouveau state.
   if (!check) {
       tetrimino.position.x++;
-      return {tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
+      return {...state, tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
   }
 
   // sinon, retourne le meme state qu'avant, par consequent la piece n'aura pas bouger
-  return {state};
+  return {...state};
 }
 
 
@@ -93,11 +93,11 @@ function goLeft(state) {
   //  s'il n'y a pas de collision, alors retourne le nouveau state.
   if (!check) {
       tetrimino.position.x--;
-      return {tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
+      return {...state, tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
   }
 
   // sinon, retourne le meme state qu'avant, par consequent la piece n'aura pas bouger
-  return {state};
+  return {...state};
 }
 
 
@@ -114,7 +114,7 @@ function goDown(state) {
   //  s'il n'y a pas de collision, alors retourne le nouveau state.
   if (!check) {
     tetrimino.position.y++;
-    return {tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
+    return {...state, tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
   }
 
   tetrimino.position.y = 0;
@@ -125,7 +125,7 @@ function goDown(state) {
   **  puisque provisionalArray contient la piece en mouvement, mais cette derniere etant au maximum en bas qu'
   **  elle puisse, elle se retrouve donc immobile, figer a jamais dans l'array :)
   */
-  return {tetrimino: tetrimino, array: state.provisionalArray.map(row => row.map(value => {return value})), provisionalArray: state.provisionalArray}
+  return {...state, tetrimino: tetrimino, array: state.provisionalArray.map(row => row.map(value => {return value})), provisionalArray: state.provisionalArray}
 }
 
 
@@ -191,9 +191,9 @@ export default function move(state = {
         case DOWN:
           return goDown(state);
         default:
-          return state
+          return {...state}
     }
     default:
-      return state
+      return {...state}
   }
 }
