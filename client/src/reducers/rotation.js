@@ -92,7 +92,6 @@ function turnRight(state) {
 
   //  s'il n'y a pas de collision, alors retourne le nouveau state.
   if (!check) {
-      tetrimino.position.x++;
       return {...state, tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
   }
 
@@ -121,7 +120,6 @@ function turnLeft(state) {
 
   //  s'il n'y a pas de collision, alors retourne le nouveau state.
   if (!check) {
-      tetrimino.position.x++;
       return {...state, tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
   }
 
