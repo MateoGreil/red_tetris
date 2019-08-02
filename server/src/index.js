@@ -28,22 +28,18 @@ function disconnect(player) {
   }
 }
 
-function start(game) {
-  
-}
-
-
 //connexion au client
 io.sockets.on('connection', function(client) {
   //console.log('connection: ', client)
   let player = connect(client)
 
   client.on('disconnect', () => {
+    client.leave(player.gameName)
     disconnect(player)
   });
 
   client.on('start', () => {
-    start(games[player.gameName])
+    games[player.gameName].sendPiece(io)
   })
 
 });

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Row from '../Rows/Row'
 import './GameBoard.css'
 import { Direction } from '../../actions/move'
+import { start } from 'repl';
 
 const { RIGHT, LEFT, DOWN } = Direction
 
@@ -16,11 +17,13 @@ function GameBoard({ board, move }) {
 
   var handleKeyPress = (event) => {
     if(event.key === 'd')
-        move(RIGHT)
+      move(RIGHT)
     else if (event.key === 'a')
-        move(LEFT)
+      move(LEFT)
     else if (event.key === 's')
-        move(DOWN)
+      move(DOWN)
+    //else if (event.key === ' ')
+    //  start()
   };
 
 
