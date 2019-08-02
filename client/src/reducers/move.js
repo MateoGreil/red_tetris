@@ -39,9 +39,9 @@ function checkCollision(tetrimino, array, dir) {
 
 function putPieceInGame(rows, tetrimino) {
   if (tetrimino) {
-      var i = 0;
+      let i = 0;
       while (tetrimino.piece[i] != null) {
-          var j = 0;
+          let j = 0;
           while (tetrimino.piece[i][j] != null) {//ajouter if piece.piece[i][j] != 0
               rows[i + tetrimino.position.y][j + tetrimino.position.x] = tetrimino.piece[i][j];
               j++;
@@ -58,8 +58,8 @@ function putPieceInGame(rows, tetrimino) {
 */
 
 function goRight(state) {
-  var tetrimino = state.tetrimino
-  var array = state.array
+  let tetrimino = state.tetrimino
+  let array = state.array
   const check = checkCollision(tetrimino, array, {x: 1, y: 0});
 
   //  s'il n'y a pas de collision, alors retourne le nouveau state.
