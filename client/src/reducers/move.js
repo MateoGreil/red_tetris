@@ -43,8 +43,10 @@ function putPieceInGame(rows, tetrimino) {
       while (tetrimino.piece[i] != null) {
           let j = 0;
           while (tetrimino.piece[i][j] != null) {//ajouter if piece.piece[i][j] != 0
+            if (tetrimino.piece[i][j] != 0) {
               rows[i + tetrimino.position.y][j + tetrimino.position.x] = tetrimino.piece[i][j];
-              j++;
+            }
+            j++;
           }
           i++;
       }
