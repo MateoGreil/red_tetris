@@ -13,26 +13,7 @@ function checkCollision(tetrimino, array, dir) {
 }
 
 const redTetrisMiddleware = store => next => action => {
-    switch (action.type) {
-        case MOVE:
-            const tetrimino = store.tetrimino
-            const array = store.array
-            switch(action.direction) {
-                case RIGHT:
-                    if (checkCollision(tetrimino, array, {x: 1, y: 0}))
-                        next(action)
-                case LEFT:
-                    if (checkCollision(tetrimino, array, {x: -1, y: 0}))
-                        next(action)
-                case DOWN:
-                    if (checkCollision(tetrimino, array, {x: 0, y: 1}))
-                        next(action)
-                default:
-                    next(action)
-        }
-        default:
-            next(action)
-      }
+    next(action)
 }
 
 export default redTetrisMiddleware
