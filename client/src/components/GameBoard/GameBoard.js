@@ -3,11 +3,13 @@ import PropTypes from 'prop-types'
 import Row from '../Rows/Row'
 import './GameBoard.css'
 import { Direction } from '../../actions/move'
+import { rotation } from '../../actions/rotation'
 
 const { RIGHT, LEFT, DOWN } = Direction
+const { CW_ROT, CTCW_ROT } = rotation
 
 
-function GameBoard({ board, move }) {
+function GameBoard({ board, move, rote }) {
 
   /*
   **  handleKeyPress est la fonction qui permettra de decider en fonction de l'evenement, le
@@ -16,11 +18,15 @@ function GameBoard({ board, move }) {
 
   var handleKeyPress = (event) => {
     if(event.key === 'd')
-        move(RIGHT)
+      move(RIGHT)
     else if (event.key === 'a')
-        move(LEFT)
+      move(LEFT)
     else if (event.key === 's')
-        move(DOWN)
+      move(DOWN)
+    else if (event.key === 'e')
+      rote(CW_ROT)
+    else if (event.key === 'q')
+      rote(CTCW_ROT)
   };
 
 
