@@ -55,36 +55,40 @@ function modTetri(tetrimino, rot) {
   } 
 
   let size = tetrimino.piece.length - 1;
-  let tempTetri = tetrimino;
+  let tempTetri = tetrimino.piece.map(row => {return {...row}});//il faut copier en profondeur les variables
 
-  for (let i = 0; i < tempTetri.piece.length; i++) {
-    for (let j = 0; j < tempTetri.piece[i].length; j++) {
-      tempTetri[i][j] = 0;
+  /* ca sert a r
+  for (let i = 0; tempTetri.piece[i]; i++) {
+    for (let j = 0; tempTetri.piece[i][j]; j++) {
+      tempTetri.piece[i][j] = 0;
     };
-  }
+  }*/
 
   if (rot === 1) {
-    for (let i = 0; i < tempTetri.piece.length; i++) {
-      for (let j = 0; j < tempTetri.piece[i].length; j++) {
-        tempTetri[i][j] = tetrimino[size - i][size - j];
-      }; 
-  };
-}
-  else if (rot === 2) {
-    for (let i = 0; i < tempTetri.piece.length; i++) {
-      for (let j = 0; j < tempTetri.piece[i].length; j++) {
-        tempTetri[size -i][size - j] = tetrimino[i][j];
-      }; 
+    for (let i = 0; tempTetri[i] != null; i++) {
+      for (let j = 0; tempTetri[i][j] != null; j++) {
+        tetrimino.piece[i][j] = tempTetri[size - j][i]
+      }
+    }
   }
-}
-  return (tempTetri);
+
+  else if (rot === 2) {
+    for (let i = 0; tempTetri[i] != null; i++) {
+      for (let j = 0; tempTetri[i][j] != null; j++) {
+        tetrimino.piece[i][j] = tempTetri[j][size - i];
+      }
+    }
+  }
+
+  console.log(tetrimino.piece)
+  return (tetrimino);
 }
 
 function turnRight(state) {
   let tetrimino = state.tetrimino;
   let array = state.array;
   tetrimino = modTetri(tetrimino, 1);
-  const check = checkCollision(tetrimino, array, {x: 1, y: 0});
+  const check = checkCollision(tetrimino, array);
 
   //  s'il n'y a pas de collision, alors retourne le nouveau state.
   if (!check) {
@@ -113,7 +117,7 @@ function turnLeft(state) {
   let tetrimino = state.tetrimino;
   let array = state.array;
   tetrimino = modTetri(tetrimino, 2);
-  const check = checkCollision(tetrimino, array, {x: 1, y: 0});
+  const check = checkCollision(tetrimino, array);
 
   //  s'il n'y a pas de collision, alors retourne le nouveau state.
   if (!check) {
@@ -132,7 +136,7 @@ function turnLeft(state) {
 */
 
 export default function rote(state = {
-  tetrimino: tetriminos[1],
+  tetrimino: tetriminos[3],
   array: [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],

@@ -137,7 +137,7 @@ function goDown(state) {
 */
 
 export default function move(state = {
-  tetrimino: tetriminos[1],
+  tetrimino: tetriminos[3],
   array: [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
