@@ -69,7 +69,7 @@ function goRight(state) {
   }
 
   // sinon, retourne le meme state qu'avant, par consequent la piece n'aura pas bouger
-  return {state};
+  return {...state};
 }
 
 
@@ -97,7 +97,7 @@ function goLeft(state) {
   }
 
   // sinon, retourne le meme state qu'avant, par consequent la piece n'aura pas bouger
-  return {state};
+  return {...state};
 }
 
 
@@ -125,7 +125,7 @@ function goDown(state) {
   **  puisque provisionalArray contient la piece en mouvement, mais cette derniere etant au maximum en bas qu'
   **  elle puisse, elle se retrouve donc immobile, figer a jamais dans l'array :)
   */
-  return {tetrimino: tetrimino, array: state.provisionalArray.map(row => row.map(value => {return value})), provisionalArray: state.provisionalArray}
+  return {...state, tetrimino: tetrimino, array: state.provisionalArray.map(row => row.map(value => {return value})), provisionalArray: state.provisionalArray}
 }
 
 
@@ -191,9 +191,9 @@ export default function move(state = {
         case DOWN:
           return goDown(state);
         default:
-          return state
+          return {...state}
     }
     default:
-      return state
+      return {...state}
   }
 }
