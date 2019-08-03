@@ -5,9 +5,10 @@ import './GameBoard.css'
 import { Moves } from '../../actions/moves'
 
 const {
-  RIGHT_TRANSLATION, 
-  LEFT_TRANSLATION, 
+  RIGHT_TRANSLATION,
+  LEFT_TRANSLATION,
   DOWN_TRANSLATION,
+  BOTTOM_TRANSLATION,
   CLOCKWORK_ROTATION,
   COUNTER_CLOCKWORK_ROTATION
 } = Moves
@@ -27,6 +28,8 @@ function GameBoard({ board, move }) {
       move(LEFT_TRANSLATION)
     else if (event.key === 's')
       move(DOWN_TRANSLATION)
+    else if (event.key === ' ')
+      move(BOTTOM_TRANSLATION)
     else if (event.key === 'e')
       move(CLOCKWORK_ROTATION)
     else if (event.key === 'q')
@@ -38,7 +41,7 @@ function GameBoard({ board, move }) {
   **  useEffect est une fonction qui sera appelé par React a chaque fois que les states données
   **  en second parametres sont modifiés. Ici, je n'en ai pas mis, donc la fonction sera appelé
   **  une seule et unique fois : a la creation du component.
-  */ 
+  */
 
   React.useEffect(() => {
 
@@ -82,7 +85,7 @@ function GameBoard({ board, move }) {
   )
 }
 
-  
+
 /*
 **  permet de definir quelle type de props je retrouverai dans ce component. Je crois que ce n'est pas
 **  obligatoire, mais c'est certainement plus propre.
