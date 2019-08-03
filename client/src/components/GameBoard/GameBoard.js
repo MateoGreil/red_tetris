@@ -4,12 +4,13 @@ import Row from '../Rows/Row'
 import './GameBoard.css'
 import { Direction } from '../../actions/move'
 import { Options } from '../../actions/manageGame';
+import { rotation } from '../../actions/rotation'
 
 const { RIGHT, LEFT, DOWN } = Direction
 const { START } = Options
+const { CW_ROT, CTCW_ROT } = rotation
 
-
-function GameBoard({ board, move, manageGame }) {
+function GameBoard({ board, move, rote, manageGame }) {
 
   /*
   **  handleKeyPress est la fonction qui permettra de decider en fonction de l'evenement, le
@@ -25,6 +26,10 @@ function GameBoard({ board, move, manageGame }) {
       move(DOWN)
     else if (event.key === 'r')
       manageGame(START)
+    else if (event.key === 'e')
+      rote(CW_ROT)
+    else if (event.key === 'q')
+      rote(CTCW_ROT)
   };
 
 

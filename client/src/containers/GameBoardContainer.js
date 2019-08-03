@@ -3,6 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { move } from '../actions/move'
 import { manageGame } from '../actions/manageGame'
+import { rote } from '../actions/rotation'
 import GameBoard from '../components/GameBoard/GameBoard'
 
 /*
@@ -31,7 +32,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   move: direction => dispatch(move(direction)),
-  manageGame: option => dispatch(manageGame(option))
+  manageGame: option => dispatch(manageGame(option)),
+  rote: rotation => dispatch(rote(rotation))
 })
 
 

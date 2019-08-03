@@ -1,19 +1,11 @@
 
-import { MOVE, Direction } from '../actions/move'
+import { ROTE, Direction, rotation } from '../actions/rotation'
 import tetriminos from '../components/Tetriminos/Tetriminos';
 
-const { RIGHT, LEFT, DOWN } = Direction
+const { CW_ROT, CTCW_ROT } = rotation
 
 
-/*
-**  fonction checkCollision : ca tombe sous le sens ca check si ya une collision au deplacement.
-**  prend en paremetre le tetrimino qu'on souhaite deplacer, le plateau de jeu dans lequel on
-**  veut le placer, et la direction dans laquelle on souhaite le deplacer. (dir sous forme {x: 0, y: 0})
-**  PS : Je reflechis a envoyer ce checkCollision dans le middleware, pour que le check soit fait avant
-**  meme de passer par le reducer.
-*/
-
-function checkCollision(tetrimino, array, dir) {
+function checkCollision(tetrimino, array) {
   var check = false
 
   /*
@@ -24,7 +16,7 @@ function checkCollision(tetrimino, array, dir) {
 
   tetrimino.piece.map((rowPiece, i) => {
       rowPiece.map((square, j) => {
-          if (square && (tetrimino.position.y + i + dir.y >= 20 || tetrimino.position.x + j + dir.x >= 10 || tetrimino.position.x + j + dir.x < 0 || array[tetrimino.position.y + i + dir.y][tetrimino.position.x + j + dir.x])) {
+          if (square && (tetrimino.position.y + i >= 20 || tetrimino.position.x + j >= 10 || tetrimino.position.x + j < 0 || array[tetrimino.position.y + i][tetrimino.position.x + j])) {
               check = true
           }
       });
@@ -43,10 +35,8 @@ function putPieceInGame(rows, tetrimino) {
       while (tetrimino.piece[i] != null) {
           let j = 0;
           while (tetrimino.piece[i][j] != null) {//ajouter if piece.piece[i][j] != 0
-            if (tetrimino.piece[i][j] != 0) {
               rows[i + tetrimino.position.y][j + tetrimino.position.x] = tetrimino.piece[i][j];
-            }
-            j++;
+              j++;
           }
           i++;
       }
@@ -56,17 +46,52 @@ function putPieceInGame(rows, tetrimino) {
 
 
 /*
-**  fonction deplacement de la piece vers la droite
+**  fonction rotation de la piece vers la droite
 */
 
-function goRight(state) {
-  let tetrimino = state.tetrimino
-  let array = state.array
-  const check = checkCollision(tetrimino, array, {x: 1, y: 0});
+function modTetri(tetrimino, rot) {
+  if (tetrimino.name === "X") {
+    return (tetrimino);
+  } 
+
+  let size = tetrimino.piece.length - 1;
+  let tempTetri = tetrimino.piece.map(row => {return {...row}});//il faut copier en profondeur les variables
+
+  /* ca sert a r
+  for (let i = 0; tempTetri.piece[i]; i++) {
+    for (let j = 0; tempTetri.piece[i][j]; j++) {
+      tempTetri.piece[i][j] = 0;
+    };
+  }*/
+
+  if (rot === 1) {
+    for (let i = 0; tempTetri[i] != null; i++) {
+      for (let j = 0; tempTetri[i][j] != null; j++) {
+        tetrimino.piece[i][j] = tempTetri[size - j][i]
+      }
+    }
+  }
+
+  else if (rot === 2) {
+    for (let i = 0; tempTetri[i] != null; i++) {
+      for (let j = 0; tempTetri[i][j] != null; j++) {
+        tetrimino.piece[i][j] = tempTetri[j][size - i];
+      }
+    }
+  }
+
+  console.log(tetrimino.piece)
+  return (tetrimino);
+}
+
+function turnRight(state) {
+  let tetrimino = state.tetrimino;
+  let array = state.array;
+  tetrimino = modTetri(tetrimino, 1);
+  const check = checkCollision(tetrimino, array);
 
   //  s'il n'y a pas de collision, alors retourne le nouveau state.
   if (!check) {
-      tetrimino.position.x++;
       return {...state, tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
   }
 
@@ -87,14 +112,14 @@ function goRight(state) {
 **  fonction deplacement de la piece vers la gauche
 */
 
-function goLeft(state) {
-  var tetrimino = state.tetrimino
-  var array = state.array
-  const check = checkCollision(tetrimino, array, {x: -1, y: 0});
+function turnLeft(state) {
+  let tetrimino = state.tetrimino;
+  let array = state.array;
+  tetrimino = modTetri(tetrimino, 2);
+  const check = checkCollision(tetrimino, array);
 
   //  s'il n'y a pas de collision, alors retourne le nouveau state.
   if (!check) {
-      tetrimino.position.x--;
       return {...state, tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
   }
 
@@ -104,39 +129,11 @@ function goLeft(state) {
 
 
 /*
-**  fonction deplacement de la piece vers le bas
-*/
-
-function goDown(state) {
-  var tetrimino = state.tetrimino
-  var array = state.array
-
-  const check = checkCollision(tetrimino, array, {x: 0, y: 1});
-
-  //  s'il n'y a pas de collision, alors retourne le nouveau state.
-  if (!check) {
-    tetrimino.position.y++;
-    return {...state, tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
-  }
-
-  tetrimino.position.y = 0;
-  tetrimino.position.x = 3;
-  /*
-  **  sinon, ça veut dire que la piece ne pourra plus descendre. On retourne donc notre state a jour :
-  **  array, qui contient toutes les pieces qui sont immobiles et placer, prend la valeur de provisionalArray
-  **  puisque provisionalArray contient la piece en mouvement, mais cette derniere etant au maximum en bas qu'
-  **  elle puisse, elle se retrouve donc immobile, figer a jamais dans l'array :)
-  */
-  return {...state, tetrimino: tetrimino, array: state.provisionalArray.map(row => row.map(value => {return value})), provisionalArray: state.provisionalArray}
-}
-
-
-/*
-**  move est mon reducer, c'est ce dernier qui sera appelé par la fonction dispatch.
+**  rote est mon reducer, c'est ce dernier qui sera appelé par la fonction dispatch.
 **  "state = {...}"" permet d'initialiser les states s'ils ne le sont pas.
 */
 
-export default function move(state = {
+export default function rote(state = {
   tetrimino: tetriminos[3],
   array: [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -184,14 +181,12 @@ export default function move(state = {
   ]
 }, action) {
   switch (action.type) {
-    case MOVE:
-      switch(action.direction) {
-        case RIGHT:
-          return goRight(state);
-        case LEFT:
-          return goLeft(state);
-        case DOWN:
-          return goDown(state);
+    case ROTE:
+      switch(action.rotation) {
+        case CW_ROT:
+          return turnRight(state);
+        case CTCW_ROT:
+          return turnLeft(state);
         default:
           return {...state}
     }
