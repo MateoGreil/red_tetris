@@ -53,7 +53,7 @@ function GameBoard({ board, move }) {
       let interval = null;
       interval = setInterval(() => {
         move(DOWN_TRANSLATION)
-      }, 100);
+      }, 500);
 
 
       /*

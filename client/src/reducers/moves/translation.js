@@ -1,6 +1,8 @@
 
 import checkCollision from './checkCollision'
 import putPieceInGame from './putPieceInGame'
+import reorganizeLines  from './manageLines'
+import deleteLines  from './manageLines'
 
 /*
 **  fonction deplacement de la piece vers la droite
@@ -75,6 +77,10 @@ export function translateDown(state) {
     **  puisque provisionalArray contient la piece en mouvement, mais cette derniere etant au maximum en bas qu'
     **  elle puisse, elle se retrouve donc immobile, figer a jamais dans l'array :)
     */
+    state.provisionalArray = deleteLines (state);
+    state.provisionalArray = reorganizeLines (state);
+
+
     return {...state, tetrimino: tetrimino, array: state.provisionalArray.map(row => row.map(value => {return value})), provisionalArray: state.provisionalArray}
 }
 
