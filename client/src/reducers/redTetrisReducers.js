@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import move from './moves.js'
+import move from './moves/moves.js'
 
 
 /*
