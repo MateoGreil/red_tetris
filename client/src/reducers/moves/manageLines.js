@@ -4,32 +4,30 @@
 */
 
 function checkLines (state){
-    array = [];
-    pix = 0;
-    line = 0;
-    check = 0;
+    let array = [];
+    let pix = 0;
+    let line = 0;
     for (row of state.provisionalArray) {
         for (elem of row){
             if (elem !== 0){
                 pix++;
             }
         if (pix === 10) {
-            array.push(line)
-            check++;
+            array.push(line);
         }
         pix = 0;
         line++;
         }
     }
-    return(check, array);
+    return(array);
 }
 
 export default function deleteLines(state) {
-    testRows = checkLines(state);
+    let testRows = checkLines(state);
     if (testRows[0] === 0) {
         return array;
     }
-    array = state.provisionalArray;
+    let array = state.provisionalArray;
 
     return (array);
 }
