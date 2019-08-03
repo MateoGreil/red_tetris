@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Row from '../Rows/Row'
 import './GameBoard.css'
 import { Moves } from '../../actions/moves'
+import { Options } from '../../actions/manageGame'
 
 const {
   RIGHT_TRANSLATION, 
@@ -12,8 +13,12 @@ const {
   COUNTER_CLOCKWORK_ROTATION
 } = Moves
 
+const {
+  START
+} = Options
 
-function GameBoard({ board, move }) {
+
+function GameBoard({ board, move, manageGame }) {
 
   /*
   **  handleKeyPress est la fonction qui permettra de decider en fonction de l'evenement, le
@@ -31,6 +36,8 @@ function GameBoard({ board, move }) {
       move(CLOCKWORK_ROTATION)
     else if (event.key === 'q')
       move(COUNTER_CLOCKWORK_ROTATION)
+    else if (event.key === 'r')
+      manageGame(START)
   };
 
 

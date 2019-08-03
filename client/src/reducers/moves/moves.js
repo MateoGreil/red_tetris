@@ -1,8 +1,5 @@
 
 import { MOVE, Moves } from '../../actions/moves'
-import tetriminos from '../../components/Tetriminos/Tetriminos';
-import checkCollision from './checkCollision'
-import putPieceInGame from './putPieceInGame'
 import {
   translateRight,
   translateLeft,
@@ -27,7 +24,7 @@ const {
 */
 
 export default function move(state = {
-  tetrimino: tetriminos[3],
+  tetrimino: null,
   array: [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -76,19 +73,22 @@ export default function move(state = {
 
   switch (action.type) {
     case MOVE:
-      switch(action.move) {
-        case RIGHT_TRANSLATION:
-          return translateRight(state);
-        case LEFT_TRANSLATION:
-          return translateLeft(state);
-        case DOWN_TRANSLATION:
-          return translateDown(state);
-        case CLOCKWORK_ROTATION:
-          return rotateRight(state);
-        case COUNTER_CLOCKWORK_ROTATION:
-          return rotateLeft(state)
-        default:
-          return {...state}
+      if (state.tetrimino) {
+        switch(action.move) {
+          case RIGHT_TRANSLATION:
+            return translateRight(state);
+          case LEFT_TRANSLATION:
+            return translateLeft(state);
+          case DOWN_TRANSLATION:
+            return translateDown(state);
+          case CLOCKWORK_ROTATION:
+            return rotateRight(state);
+          case COUNTER_CLOCKWORK_ROTATION:
+            return rotateLeft(state)
+          default:
+            return {...state}
+      }
+      return {...state}
     }
     default:
       return {...state}

@@ -2,6 +2,7 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 import { move } from '../actions/moves'
+import { manageGame } from '../actions/manageGame'
 import GameBoard from '../components/GameBoard/GameBoard'
 
 /*
@@ -29,7 +30,8 @@ const mapStateToProps = state => ({
 */
 
 const mapDispatchToProps = dispatch => ({
-  move: moves => dispatch(move(moves))
+  move: moves => dispatch(move(moves)),
+  manageGame: option => dispatch(manageGame(option))
 })
 
 
