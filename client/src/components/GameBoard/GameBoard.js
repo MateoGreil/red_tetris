@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Row from '../Rows/Row'
 import './GameBoard.css'
-import { Moves } from '../../actions/move'
+import { Moves } from '../../actions/moves'
 
 const {
   RIGHT_TRANSLATION, 

@@ -1,5 +1,5 @@
 
-import { MOVE, Moves } from '../actions/move'
+import { MOVE, Moves } from '../actions/moves'
 import tetriminos from '../components/Tetriminos/Tetriminos';
 
 const { 
