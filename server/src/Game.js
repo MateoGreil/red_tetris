@@ -7,6 +7,7 @@ class Game {
         this.p1 = p1
         this.players = [p1]
         p1.id = 0
+        this.playing = false
     }
 
     addPlayer(player) {
@@ -24,8 +25,9 @@ class Game {
 
     sendPiece(io) {
       let piece = new Piece
-      io.to(this.gameName).emit('newPiece', piece)
-
+      io.to(this.gameName).emit('newPiece', {piece: piece.shape})
+      console.log('sending piece')
+      console.log(piece.shape)
     }
 }
 

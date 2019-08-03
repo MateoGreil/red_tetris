@@ -1,5 +1,6 @@
 const Player = require('./Player.js');
 const Game = require('./Game.js');
+const Piece = require('./Piece')
 var http = require('http');
 var server = http.createServer();
 var io = require('socket.io').listen(server);
@@ -9,7 +10,7 @@ var games = [];
 function connect(client) {
   console.log(client.handshake.query.username + ' is connected to game ' + client.handshake.query.gameName)
   var player = new Player(client.handshake.query.username, client.handshake.query.gameName, client);
-  
+
   if (!games[player.gameName]) {
     games[player.gameName] = new Game(player);
     console.log("Game " + player.gameName + " is created.");
@@ -31,7 +32,7 @@ function disconnect(player) {
 //connexion au client
 io.sockets.on('connection', function(client) {
   //console.log('connection: ', client)
-  let player = connect(client)
+  let player = connect(client)  
 
   client.on('disconnect', () => {
     client.leave(player.gameName)
@@ -39,7 +40,11 @@ io.sockets.on('connection', function(client) {
   });
 
   client.on('start', () => {
-    games[player.gameName].sendPiece(io)
+    console.log('start')
+    let piece = new Piece
+    client.emit('newPiece', piece)
+    console.log(piece)
+    //games[player.gameName].sendPiece(io)
   })
 
 });
