@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
 import move from './move.js'
-import rotation from './rotation'
 
 
 /*
@@ -10,8 +9,7 @@ import rotation from './rotation'
 */
 
 const redTetrisReducers = combineReducers({
-  move,
-  rotation
+  move
 })
 
 export default redTetrisReducers

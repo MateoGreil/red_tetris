@@ -1,9 +1,34 @@
 
-import { MOVE, Direction } from '../actions/move'
+import { MOVE, Moves } from '../actions/move'
 import tetriminos from '../components/Tetriminos/Tetriminos';
 
-const { RIGHT, LEFT, DOWN } = Direction
+const { 
+  RIGHT_TRANSLATION, 
+  LEFT_TRANSLATION,
+  DOWN_TRANSLATION,
+  CLOCKWORK_ROTATION,
+  COUNTER_CLOCKWORK_ROTATION
+} = Moves
 
+
+function checkCollisionRot(tetrimino, array) {
+  var check = false
+
+  /*
+  **  pour chaque partie de la piece, va verifier si sa nouvelle position est deja prise par quelque chose
+  **  (donc si la valeure dans array a cette nouvelle position est bien egal a 0). De plus, va verifier si
+  **  cette nouvelle position est bien dans le plateau de jeu (x >= 0 && x < 10 && y >= 0 && y < 20).
+  */
+
+  tetrimino.piece.map((rowPiece, i) => {
+      rowPiece.map((square, j) => {
+          if (square && (tetrimino.position.y + i >= 20 || tetrimino.position.x + j >= 10 || tetrimino.position.x + j < 0 || array[tetrimino.position.y + i][tetrimino.position.x + j])) {
+              check = true
+          }
+      });
+  });
+  return check;
+}
 
 /*
 **  fonction checkCollision : ca tombe sous le sens ca check si ya une collision au deplacement.
@@ -130,6 +155,87 @@ function goDown(state) {
   return {...state, tetrimino: tetrimino, array: state.provisionalArray.map(row => row.map(value => {return value})), provisionalArray: state.provisionalArray}
 }
 
+/*
+**  fonction rotation de la piece vers la droite
+*/
+
+function modTetri(tetrimino, rot) {
+  if (tetrimino.name === "X") {
+    return (tetrimino);
+  } 
+
+  let size = tetrimino.piece.length - 1;
+  let tempTetri = tetrimino.piece.map(row => {return {...row}});//il faut copier en profondeur les variables
+
+  /* ca sert a r
+  for (let i = 0; tempTetri.piece[i]; i++) {
+    for (let j = 0; tempTetri.piece[i][j]; j++) {
+      tempTetri.piece[i][j] = 0;
+    };
+  }*/
+
+  if (rot === 1) {
+    for (let i = 0; tempTetri[i] != null; i++) {
+      for (let j = 0; tempTetri[i][j] != null; j++) {
+        tetrimino.piece[i][j] = tempTetri[size - j][i]
+      }
+    }
+  }
+
+  else if (rot === 2) {
+    for (let i = 0; tempTetri[i] != null; i++) {
+      for (let j = 0; tempTetri[i][j] != null; j++) {
+        tetrimino.piece[i][j] = tempTetri[j][size - i];
+      }
+    }
+  }
+
+  console.log(tetrimino.piece)
+  return (tetrimino);
+}
+
+function turnRight(state) {
+  let tetrimino = state.tetrimino;
+  let array = state.array;
+  tetrimino = modTetri(tetrimino, 1);
+  const check = checkCollisionRot(tetrimino, array);
+
+  //  s'il n'y a pas de collision, alors retourne le nouveau state.
+  if (!check) {
+      return {...state, tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
+  }
+
+  // sinon, retourne le meme state qu'avant, par consequent la piece n'aura pas bouger
+  return {...state};
+}
+
+
+/*
+**  dans les trois prochaines fonctions, j'utilise des array.map, et pas des array. c'est pour envoyer des copies de ces derniers, sinon
+**  les valeurs des arrays seraient modifier dans les fonctions, or ce n'est pas ce que je veux, par exemple dans le premier return ici bas :
+**    "return {tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};"
+**  je ne veux pas que array soit modifier, sinon, la piece serait ajouter a chaque deplacement dans l'array principal. Je sais pas si c'est tres clair,
+**  mais au pire essaie d'envoyer simplement l'array, tu comprendras vite.
+*/
+
+/*
+**  fonction deplacement de la piece vers la gauche
+*/
+
+function turnLeft(state) {
+  let tetrimino = state.tetrimino;
+  let array = state.array;
+  tetrimino = modTetri(tetrimino, 2);
+  const check = checkCollisionRot(tetrimino, array);
+
+  //  s'il n'y a pas de collision, alors retourne le nouveau state.
+  if (!check) {
+      return {...state, tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
+  }
+
+  // sinon, retourne le meme state qu'avant, par consequent la piece n'aura pas bouger
+  return {...state};
+}
 
 /*
 **  move est mon reducer, c'est ce dernier qui sera appelé par la fonction dispatch.
@@ -186,12 +292,16 @@ export default function move(state = {
   switch (action.type) {
     case MOVE:
       switch(action.direction) {
-        case RIGHT:
+        case RIGHT_TRANSLATION:
           return goRight(state);
-        case LEFT:
+        case LEFT_TRANSLATION:
           return goLeft(state);
-        case DOWN:
+        case DOWN_TRANSLATION:
           return goDown(state);
+        case CLOCKWORK_ROTATION:
+          return turnRight(state);
+        case COUNTER_CLOCKWORK_ROTATION:
+          return turnLeft(state)
         default:
           return {...state}
     }
