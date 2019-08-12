@@ -1,8 +1,8 @@
 class Player {
 
-    constructor(username, gameName, client) {
+    constructor(username, indexGame, client) {
         this.name = username;
-        this.gameName = gameName;
+        this.indexGame = indexGame;
         client.join(this.gameName);
     }
 }

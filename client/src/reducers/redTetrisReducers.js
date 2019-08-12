@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import move from './moves/moves'
 import manageGame from './manageGame'
+import mainMenu from './mainMenu'
 
 
 /*
@@ -11,7 +12,8 @@ import manageGame from './manageGame'
 
 const redTetrisReducers = combineReducers({
   move,
-  manageGame
+  manageGame,
+  mainMenu
 })
 
 export default redTetrisReducers

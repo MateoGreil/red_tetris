@@ -7,45 +7,53 @@ var io = require('socket.io').listen(server);
 
 var games = [];
 
+
 function connect(client) {
   console.log(client.handshake.query.username + ' is connected to game ' + client.handshake.query.gameName)
-  var player = new Player(client.handshake.query.username, client.handshake.query.gameName, client);
 
-  if (!games[player.gameName]) {
-    games[player.gameName] = new Game(player);
-    console.log("Game " + player.gameName + " is created.");
+  var indexGame = games.findIndex((game) => game.name == client.handshake.query.gameName)
+
+  var player = new Player(client.handshake.query.username, indexGame ? indexGame : games.length, client);
+
+  if (indexGame == -1) {
+    games[games.length] = new Game(player, client.handshake.query.gameName);
   } else {
-    games[player.gameName].addPlayer(player);
+    games[indexGame].addPlayer(player);
   }
   return player
 }
 
 function disconnect(player) {
-  games[player.gameName].rmPlayer(player);
-  console.log("Player " + player.name + " is disconnected from " + player.gameName);
-  if (games[player.gameName].players.length == 0) {
-    games[player.gameName] = null;
+  games[player.indexGame].rmPlayer(player);
+  console.log("Player " + player.name + " is disconnected from " + player.gameIndex);
+  if (!games[player.gameIndex]) {
+    games.splice(player.indexGame, 1);
     console.log("Game " + player.gameName + " is removed.");
   }
 }
 
 //connexion au client
 io.sockets.on('connection', function(client) {
-  //console.log('connection: ', client)
-  let player = connect(client)  
+  //valid username and gameName
+  if (client.handshake.query.username != 'null' && client.handshake.query.gameName != 'null') {
+    let player = connect(client)  
 
-  client.on('disconnect', () => {
-    client.leave(player.gameName)
-    disconnect(player)
-  });
+    client.on('disconnect', () => {
+      client.leave(player.gameName)
+      disconnect(player)
+    });
 
-  client.on('start', () => {
-    console.log('start')
-    let piece = new Piece
-    client.emit('newPiece', piece)
-    console.log(piece)
-    //games[player.gameName].sendPiece(io)
-  })
+    client.on('start', () => {
+      console.log('start')
+      let piece = new Piece
+      client.emit('newPiece', piece)
+      console.log(piece)
+      //games[player.gameName].sendPiece(io)
+    })
+  } else {  // invalid username and gameName
+    console.log("Joueur inconnu s'est connecté au menu")
+    client.emit('games', games)
+  }
 
 });
 
