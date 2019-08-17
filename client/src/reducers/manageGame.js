@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 import { MANAGE_GAME, Options } from '../actions/manageGame'
-import { username, gameName, socket } from '../socketListener'
+import { username, gameName, socket } from '../listeners/socketListener'
 
 const { START } = Options
 
@@ -18,7 +18,8 @@ function start(state) {
 export default function manageGame(state = {
   username: username,
   gameName: gameName,
-  socket: socket
+  socket: socket,
+  error: null
 }, action) {
   switch (action.type) {
     case MANAGE_GAME:

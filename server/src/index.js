@@ -16,8 +16,12 @@ function connect(client) {
   if (!games[player.gameName]) {
     games[player.gameName] = new Game(player);
     console.log("Game " + player.gameName + " is created.");
-  } else {
+  } else if (!games[player.gameName].playing) {
     games[player.gameName].addPlayer(player);
+  } else {
+    client.emit('gameIsBusy')
+    console.log('gameIsBusy for ' + player.name + ' in ' + player.gameName)
+    return null
   }
   return player
 }
@@ -42,11 +46,7 @@ io.sockets.on('connection', function(client) {
     });
   
     client.on('start', () => {
-      console.log('start')
-      let piece = new Piece
-      client.emit('newPiece', piece)
-      console.log(piece)
-      //games[player.gameName].sendPiece(io)
+      games[player.gameName].start(io)
     })
   }
 

@@ -23,11 +23,13 @@ class Game {
         }
     }
 
-    sendPiece(io) {
-      let piece = new Piece
+    start(io) {
+      /*let piece = new Piece
       io.to(this.gameName).emit('newPiece', {piece: piece.shape})
       console.log('sending piece')
-      console.log(piece.shape)
+      console.log(piece.shape)*/
+      console.log('starting game ' + this.name)
+      this.playing = true
     }
 }
 

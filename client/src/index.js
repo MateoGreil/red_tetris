@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import io from 'socket.io-client'
 import redTetrisReducers from './reducers/redTetrisReducers';
 import redTetrisMiddleware from './middlewares/socketMiddleware';
-import addSocketListener from './socketListener'
+import addSocketListener from './listeners/socketListener'
+import AppContainer from './containers/AppContainer'
 
 const store = createStore(redTetrisReducers, applyMiddleware(redTetrisMiddleware))
 
@@ -16,7 +17,7 @@ addSocketListener(store.dispatch, store.getState)
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <AppContainer/>
   </Provider>,
   document.getElementById('root'));
 
