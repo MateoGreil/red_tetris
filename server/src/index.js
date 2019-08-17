@@ -12,8 +12,7 @@ function connect(client) {
   console.log(client.handshake.query.username + ' is connected to game ' + client.handshake.query.gameName)
 
   var indexGame = games.findIndex((game) => game.name == client.handshake.query.gameName)
-
-  var player = new Player(client.handshake.query.username, indexGame ? indexGame : games.length, client);
+  var player = new Player(client.handshake.query.username, indexGame == -1 ? games.length : indexGame, client);
 
   if (indexGame == -1) {
     games[games.length] = new Game(player, client.handshake.query.gameName);
@@ -30,6 +29,7 @@ function disconnect(player) {
     games.splice(player.indexGame, 1);
     console.log("Game " + player.gameName + " is removed.");
   }
+
 }
 
 //connexion au client

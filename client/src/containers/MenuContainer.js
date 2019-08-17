@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
-import Menu from '../components/Menu'
+import Menu from '../components/Menu/Menu'
 
 /*
 **  GameBoardContainer est un container : il contiendra le components GameBoard.
