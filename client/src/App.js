@@ -9,7 +9,7 @@ import { username, gameName } from './socketListener'
 
 function App() {
   if (username == null || gameName == null)
-    return (<div>Please, select an username and a room name</div>)
+    return (<div>Please, select an username and a room name with the hash '#roomName[username]'</div>)
   return (
     <div className="App">
       <GameBoardContainer/>
