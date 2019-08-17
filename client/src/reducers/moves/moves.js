@@ -3,17 +3,19 @@ import { MOVE, Moves } from '../../actions/moves'
 import {
   translateRight,
   translateLeft,
-  translateDown
+  translateDown,
+  translateBottom
 } from './translation'
 import {
   rotateRight,
   rotateLeft
 } from './rotation'
 
-const { 
-  RIGHT_TRANSLATION, 
+const {
+  RIGHT_TRANSLATION,
   LEFT_TRANSLATION,
   DOWN_TRANSLATION,
+  BOTTOM_TRANSLATION,
   CLOCKWORK_ROTATION,
   COUNTER_CLOCKWORK_ROTATION
 } = Moves
@@ -70,10 +72,9 @@ export default function move(state = {
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ]
 }, action) {
-
-  switch (action.type) {
-    case MOVE:
-      if (state.tetrimino) {
+  if (state.tetrimino) {
+    switch (action.type) {
+      case MOVE:
         switch(action.move) {
           case RIGHT_TRANSLATION:
             return translateRight(state);
@@ -81,6 +82,8 @@ export default function move(state = {
             return translateLeft(state);
           case DOWN_TRANSLATION:
             return translateDown(state);
+          case BOTTOM_TRANSLATION:
+            return translateBottom(state);
           case CLOCKWORK_ROTATION:
             return rotateRight(state);
           case COUNTER_CLOCKWORK_ROTATION:
@@ -88,9 +91,9 @@ export default function move(state = {
           default:
             return {...state}
       }
-      return {...state}
+      default:
+        return {...state}
     }
-    default:
-      return {...state}
   }
+  return {...state}
 }

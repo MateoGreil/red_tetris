@@ -77,3 +77,14 @@ export function translateDown(state) {
     */
     return {...state, tetrimino: tetrimino, array: state.provisionalArray.map(row => row.map(value => {return value})), provisionalArray: state.provisionalArray}
 }
+
+    export function translateBottom(state) {
+        var tetrimino = state.tetrimino
+        var array = state.array
+
+        while (tetrimino.position.y) {
+            state = translateDown(state);
+        }
+
+        return {...state, tetrimino: tetrimino, array: state.provisionalArray.map(row => row.map(value => {return value})), provisionalArray: state.provisionalArray}
+}
