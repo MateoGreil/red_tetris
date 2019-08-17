@@ -25,9 +25,11 @@ export const socket = io.connect(SERVER_ADDRESS, {query: {
 }})
 
 export default function (dispatch, getState) {
+
 	socket.on('newPiece', data => {
-        console.log(data)
-        getState().move.tetrimino = data
+		getState().move.tetriminos.push(data.piece)
+		console.log("tetrimino:")
+		console.log(getState().move.tetriminos)
 	});
 
 	catchError(socket, getState, username, gameName)

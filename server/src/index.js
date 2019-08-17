@@ -15,6 +15,7 @@ function connect(client) {
 
   if (!games[player.gameName]) {
     games[player.gameName] = new Game(player);
+    client
     console.log("Game " + player.gameName + " is created.");
   } else if (!games[player.gameName].playing) {
     games[player.gameName].addPlayer(player);
@@ -47,6 +48,10 @@ io.sockets.on('connection', function(client) {
   
     client.on('start', () => {
       games[player.gameName].start(io)
+    })
+
+    client.on('askForNewPiece', () => {
+      games[player.gameName].sendNewPiece(io)
     })
   }
 

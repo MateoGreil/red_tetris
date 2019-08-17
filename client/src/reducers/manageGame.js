@@ -2,12 +2,12 @@ import io from 'socket.io-client';
 import { MANAGE_GAME, Options } from '../actions/manageGame'
 import { username, gameName, socket } from '../listeners/socketListener'
 
-const { START } = Options
+const { START, ASK_FOR_NEW_PIECE } = Options
 
 function start(state) {
   console.log('emitting start')
   state.socket.emit('start')
-  return {...state}
+  return {...state, start: true}
 }
 
 /*
@@ -19,13 +19,16 @@ export default function manageGame(state = {
   username: username,
   gameName: gameName,
   socket: socket,
-  error: null
+  error: null,
+  start: false
 }, action) {
   switch (action.type) {
     case MANAGE_GAME:
       switch(action.option) {
         case START:
-          return start(state);
+          if (!state.start)
+            return start(state);
+          return {...state}
         default:
           return {...state}
     }

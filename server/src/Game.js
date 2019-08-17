@@ -30,6 +30,13 @@ class Game {
       console.log(piece.shape)*/
       console.log('starting game ' + this.name)
       this.playing = true
+      this.sendNewPiece(io)
+    }
+
+    sendNewPiece(io) {
+        console.log("sending new piece to " + this.name)
+        let piece = new Piece
+        io.to(this.name).emit('newPiece', {piece: piece})
     }
 }
 

@@ -17,7 +17,8 @@ const {
   DOWN_TRANSLATION,
   BOTTOM_TRANSLATION,
   CLOCKWORK_ROTATION,
-  COUNTER_CLOCKWORK_ROTATION
+  COUNTER_CLOCKWORK_ROTATION,
+  ASK_FOR_NEW_PIECE
 } = Moves
 
 /*
@@ -25,8 +26,13 @@ const {
 **  "state = {...}"" permet d'initialiser les states s'ils ne le sont pas.
 */
 
+function askForNewPiece(state) {
+  console.log('askForNewPiece')
+  state.socket.emit('askForNewPiece')
+}
+
 export default function move(state = {
-  tetrimino: null,
+  tetriminos: [],
   array: [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -72,7 +78,7 @@ export default function move(state = {
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ]
 }, action) {
-  if (state.tetrimino) {
+  if (state.tetriminos[0]) {
     switch (action.type) {
       case MOVE:
         switch(action.move) {
@@ -88,6 +94,8 @@ export default function move(state = {
             return rotateRight(state);
           case COUNTER_CLOCKWORK_ROTATION:
             return rotateLeft(state)
+          case ASK_FOR_NEW_PIECE:
+            return askForNewPiece(state)
           default:
             return {...state}
       }
