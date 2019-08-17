@@ -4,10 +4,13 @@ const SERVER_ADDRESS = 'localhost:8000'
 
 
 function catchNamesFrom(hash) {
-    var username = hash.split('[')[1].split(']')[0]
-    var gameName = hash.split('#')[1].split('[')[0]
-
-    return {username, gameName}
+	var username = null
+	var gameName = null
+	if (hash.split('[')[1] && hash.split('[')[1].split(']')[0] && hash.split('#')[1] && hash.split('#')[1].split('[')[0]) {
+		username = hash.split('[')[1].split(']')[0]
+		gameName = hash.split('#')[1].split('[')[0]
+	}
+	return {username, gameName}
 }
 
 export const {

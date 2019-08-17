@@ -8,6 +8,8 @@ var io = require('socket.io').listen(server);
 var games = [];
 
 function connect(client) {
+  if (client.handshake.query.username == 'null' || client.handshake.query.gameName == 'null')
+    return null
   console.log(client.handshake.query.username + ' is connected to game ' + client.handshake.query.gameName)
   var player = new Player(client.handshake.query.username, client.handshake.query.gameName, client);
 
@@ -32,20 +34,21 @@ function disconnect(player) {
 //connexion au client
 io.sockets.on('connection', function(client) {
   //console.log('connection: ', client)
-  let player = connect(client)  
-
-  client.on('disconnect', () => {
-    client.leave(player.gameName)
-    disconnect(player)
-  });
-
-  client.on('start', () => {
-    console.log('start')
-    let piece = new Piece
-    client.emit('newPiece', piece)
-    console.log(piece)
-    //games[player.gameName].sendPiece(io)
-  })
+  let player = connect(client)
+  if (player) {
+    client.on('disconnect', () => {
+      client.leave(player.gameName)
+      disconnect(player)
+    });
+  
+    client.on('start', () => {
+      console.log('start')
+      let piece = new Piece
+      client.emit('newPiece', piece)
+      console.log(piece)
+      //games[player.gameName].sendPiece(io)
+    })
+  }
 
 });
 
