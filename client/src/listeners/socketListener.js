@@ -1,4 +1,5 @@
 import io from 'socket.io-client'
+import catchError from './error'
 
 const SERVER_ADDRESS = 'localhost:8000'
 
@@ -29,14 +30,7 @@ export default function (dispatch, getState) {
         getState().move.tetrimino = data
 	});
 
-	socket.on('gameIsBusy', () => {
-		console.log('gameIsBusy')
-		getState().manageGame.error = "ERROR: game is busy"
-	})
-
-	if (!username || !gameName) {
-		getState().manageGame.error = "ERROR: username or room name is invalid or incomplete."
-	}
+	catchError(socket, getState, username, gameName)
 	// socket.on('dispatch', action => {
 	// 	/*
 	// 	 * If I wanted to send certain events directly through
