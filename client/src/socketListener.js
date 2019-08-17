@@ -4,24 +4,17 @@ const SERVER_ADDRESS = 'localhost:8000'
 
 
 function catchNamesFrom(hash) {
-  var username = null;
-  var gameName = null;
+    var username = hash.split('[')[1].split(']')[0]
+    var gameName = hash.split('#')[1].split('[')[0]
 
-  if (hash && hash.split('[')[1] && hash.split('[')[1].split(']')[0]) {
-    username = hash.split('[')[1].split(']')[0]
-    gameName = hash.split('#')[1].split('[')[0]
-    console.log(username)
-    console.log(gameName)
-  }
-
-  return {username, gameName}
+    return {username, gameName}
 }
 
 export const {
     username,
     gameName
 } = catchNamesFrom(document.location.hash)
-
+  
 export const socket = io.connect(SERVER_ADDRESS, {query: {
     username: username,
     gameName: gameName
@@ -31,12 +24,7 @@ export default function (dispatch, getState) {
 	socket.on('newPiece', data => {
         console.log(data)
         getState().move.tetrimino = data
-  });
-  
-  socket.on('games', data => {
-    console.log(data);
-    getState().mainMenu.games = data
-  })
+	});
 
 	// socket.on('dispatch', action => {
 	// 	/*

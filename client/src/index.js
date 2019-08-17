@@ -9,33 +9,15 @@ import io from 'socket.io-client'
 import redTetrisReducers from './reducers/redTetrisReducers';
 import redTetrisMiddleware from './middlewares/socketMiddleware';
 import addSocketListener from './socketListener'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import MenuContainer from './containers/MenuContainer';
-
 
 const store = createStore(redTetrisReducers, applyMiddleware(redTetrisMiddleware))
+
 addSocketListener(store.dispatch, store.getState)
 
-
-function Routing() {
-  if  (!store.getState().manageGame.username && window.location.pathname != '/menu') {
-    window.location = '/menu';
-  }
-
-  return (
-    <Provider store={store}>
-      <Router>
-          <Switch>
-            <Route exact path="/" component={App}/>
-            <Route path="/menu" component={MenuContainer}/>
-          </Switch>
-      </Router>
-    </Provider>
-  )
-}
-
 ReactDOM.render(
-  <Routing/>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

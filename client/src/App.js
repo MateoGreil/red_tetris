@@ -3,7 +3,6 @@ import './App.css'
 
 import GameBoardContainer from './containers/GameBoardContainer'
 
-
 function App() {
   return (
     <div className="App">
@@ -11,6 +10,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;
