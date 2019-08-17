@@ -1,7 +1,17 @@
 .RightPanel {
-    background-color: #fbbaba;
-    /* height: 1000px;
-    width: 800px; */
-    border:1px solid #000;
-    /* margin : right; */
+  background-color: hsla(204, 80%, 77%, 0.822);
+  border:4px solid #fff;
+  text-align:center;
+  align-items: flex;
+  width:auto;
+  display: inline-table;
+
+  }
+
+  .Player_Spectre {
+    padding: 10px; /* aération interne des blocs */
+    border:1px solid #fff;
+    display: flex;
+    vertical-align:center;
+    text-align:center;
   }

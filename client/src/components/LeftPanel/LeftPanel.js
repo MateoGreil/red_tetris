@@ -13,7 +13,7 @@ export default function LeftPanel(){
             Number of players : 3
         </div>
         <div className='bloc'>
-            X Y Z
+            Player A Player B Player C
         </div>
         <div className='bloc'>
             Time : 00:07
