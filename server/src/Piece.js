@@ -30,7 +30,7 @@ const tetriminos = {
       ],
       position: {
           x: 3,
-          y: 0
+          y: -4
       }
   },
   2 : {
@@ -42,7 +42,7 @@ const tetriminos = {
       ],
       position: {
           x: 4,
-          y: 0
+          y: -2
       }
   },
   3 : {
@@ -55,7 +55,7 @@ const tetriminos = {
       ],
       position: {
           x: 3,
-          y: 0
+          y: -3
       }
   },
   4 : {
@@ -69,7 +69,7 @@ const tetriminos = {
       ],
       position: {
           x: 3,
-          y: 0
+          y: -3
       }
   },
   5 : {
@@ -82,7 +82,7 @@ const tetriminos = {
       ],
       position: {
           x: 3,
-          y: 0
+          y: -3
       }
   },
   6 : {
@@ -95,7 +95,7 @@ const tetriminos = {
       ],
       position: {
           x: 3,
-          y: 0
+          y: -3
       }
   },
   7 : {
@@ -108,7 +108,7 @@ const tetriminos = {
       ],
       position: {
           x: 3,
-          y: 0
+          y: -3
       }
   }
 }

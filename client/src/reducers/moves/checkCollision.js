@@ -9,7 +9,7 @@ export default function checkCollision(tetrimino, array) {
 
   tetrimino.piece.map((rowPiece, i) => {
       rowPiece.map((square, j) => {
-          if (square && (tetrimino.position.y + i >= 20 || tetrimino.position.x + j >= 10 || tetrimino.position.x + j < 0 || array[tetrimino.position.y + i][tetrimino.position.x + j])) {
+          if (square && (tetrimino.position.y + i >= 20 || tetrimino.position.x + j >= 10 || tetrimino.position.x + j < 0 || (tetrimino.position.y + i >= 0 && array[tetrimino.position.y + i][tetrimino.position.x + j]))) {
               check = true
           }
       });
