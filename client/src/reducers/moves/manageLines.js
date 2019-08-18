@@ -3,36 +3,46 @@
 ** and then reorganize the array.
 */
 
-function checkLines (state){
-    let array = [];
-    let pix = 0;
-    let line = 0;
-    for (row of state.provisionalArray) {
-        for (elem of row){
-            if (elem !== 0){
-                pix++;
-            }
-        if (pix === 10) {
-            array.push(line);
-        }
-        pix = 0;
-        line++;
-        }
-    }
-    return(array);
+function checkRow(row) {
+  for (var i = 0; i < row.length; i++) {
+    if (!row[i])
+      return false
+  }
+  return true
 }
 
-export default function deleteLines(state) {
-    let testRows = checkLines(state);
-    if (testRows[0] === 0) {
-        return array;
-    }
-    let array = state.provisionalArray;
-
-    return (array);
+function checkLines(array){
+  let rowsToDelete = []
+  array.forEach((row, rowNb) => {
+    if (checkRow(row))
+      rowsToDelete.push(rowNb)
+  });
+  console.log('rowsToDelete=')
+  console.log(rowsToDelete)
+  return (rowsToDelete);
 }
 
-export default function reorganizeLines(state) {
-    array = state.provisionalArray;
+function copyRow(array, from, to) {
+  array[to] = array[from]
+  return array
+}
+
+function deleteFirstRow(array) {
+  array[0].forEach(element => {
+    element = 0
+  })
+  return array
+}
+
+export default function deleteLines(array) {
+    let rowsToDelete = checkLines(array);
+    
+    for (var i = 0; i < rowsToDelete.length; i++) {
+      for (var i = rowsToDelete[i]; i > 1; i--) {
+        array = copyRow(array, i - 1, i)
+      }
+      array = deleteFirstRow(array)
+    }
+
     return (array);
 }
