@@ -1,6 +1,8 @@
 
 import checkCollision from './checkCollision'
 import putPieceInGame from './putPieceInGame'
+import reorganizeLines  from './manageLines'
+import deleteLines  from './manageLines'
 import {socket} from '../../listeners/socketListener'
 
 /*
@@ -58,14 +60,13 @@ export function translateLeft(state) {
 
 export function translateDown(state) {
     var tetrimino = state.tetriminos[0]
-    var array = state.array
 
     tetrimino.position.y++;
-    const check = checkCollision(tetrimino, array);
+    const check = checkCollision(tetrimino, state.array);
 
     //  s'il n'y a pas de collision, alors retourne le nouveau state.
     if (!check) {
-        return {...state, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
+        return {...state, provisionalArray: putPieceInGame(state.array.map(row => row.map(value => {return value})), tetrimino)};
     }
 
     /*
@@ -74,12 +75,15 @@ export function translateDown(state) {
     **  puisque provisionalArray contient la piece en mouvement, mais cette derniere etant au maximum en bas qu'
     **  elle puisse, elle se retrouve donc immobile, figer a jamais dans l'array :)
     */
+    var provisionalArray = deleteLines(state.provisionalArray);
+    //provisionalArray = reorganizeLines (array);
+
     state.tetriminos.shift()
     if (state.tetriminos.length == 0) {
         console.log(socket)
         socket.emit('askForNewPiece', {})
     }
-    return {...state, tetriminos: state.tetriminos, array: state.provisionalArray.map(row => row.map(value => {return value}))}
+    return {...state, array: provisionalArray.map(row => row.map(value => {return value})), provisionalArray: provisionalArray}
 }
 
     export function translateBottom(state) {
