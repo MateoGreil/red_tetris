@@ -12,7 +12,6 @@ services:
       - "web_network"
     build: ./server
     volumes:
-      - ./server/main.js:/opt/red_tetris/server/main.js
       - ./server/src:/opt/red_tetris/server/src
 
   client:

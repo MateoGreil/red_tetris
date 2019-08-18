@@ -39,7 +39,7 @@ function modTetri(tetrimino, rot) {
 }
 
 export function rotateRight(state) {
-    let tetrimino = state.tetrimino;
+    let tetrimino = state.tetriminos[0];
     let array = state.array;
     tetrimino = modTetri(tetrimino, 1);
     const check = checkCollision(tetrimino, array);
@@ -54,7 +54,7 @@ export function rotateRight(state) {
 }
 
 export function rotateLeft(state) {
-    let tetrimino = state.tetrimino;
+    let tetrimino = state.tetriminos[0];
     let array = state.array;
     tetrimino = modTetri(tetrimino, 2);
     const check = checkCollision(tetrimino, array);

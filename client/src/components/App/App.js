@@ -1,9 +1,11 @@
 import React from 'react';
 import './App.css'
 
-import GameBoardContainer from './containers/GameBoardContainer'
+import GameBoardContainer from '../../containers/GameBoardContainer'
 
-function App() {
+function App({ error }) {
+  if (error != null)
+    return (<div>{ error }</div>)
   return (
     <div className="App">
       <GameBoardContainer/>

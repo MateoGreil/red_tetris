@@ -1,7 +1,16 @@
 import React from 'react'
-import { tetriminos, colors } from '../Tetriminos/Tetriminos.js'
 import './Row.css'
 
+const colors = {
+    0: "#ffffff",
+    1: "#00D9DA",
+    2: "#E6E703",
+    3: "#9400DE",
+    4: "#55E255",
+    5: "#DA0000",
+    6: "#0000DC",
+    7: "#E99B03"
+}
 
 //TODO: commenter et modifier ca... c'est dego.
 function Row(props) {
@@ -9,7 +18,7 @@ function Row(props) {
     var uiRow = [];
 
     for (var i = 0; i < 10; i++) {
-        uiRow.push(<square style={{backgroundColor: tetriminos[row[i]].color}}/>)
+        uiRow.push(<square style={{backgroundColor: colors[row[i]]}}/>)
     }
 
     return (

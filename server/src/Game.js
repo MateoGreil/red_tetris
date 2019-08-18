@@ -1,10 +1,13 @@
+Piece = require('./Piece')
+
 class Game {
 
     constructor(p1) {
-        this.name = p1.gameName;
-        this.p1 = p1;
-        this.players = [p1];
-        p1.id = 0;
+        this.name = p1.gameName
+        this.p1 = p1
+        this.players = [p1]
+        p1.id = 0
+        this.playing = false
     }
 
     addPlayer(player) {
@@ -20,8 +23,20 @@ class Game {
         }
     }
 
-    startGame() {
-       
+    start(io) {
+      /*let piece = new Piece
+      io.to(this.gameName).emit('newPiece', {piece: piece.shape})
+      console.log('sending piece')
+      console.log(piece.shape)*/
+      console.log('starting game ' + this.name)
+      this.playing = true
+      this.sendNewPiece(io)
+    }
+
+    sendNewPiece(io) {
+        console.log("sending new piece to " + this.name)
+        let piece = new Piece
+        io.to(this.name).emit('newPiece', {piece: piece})
     }
 }
 
