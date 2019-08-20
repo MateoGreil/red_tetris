@@ -1,9 +1,8 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
-import { move } from '../actions/moves'
 import { manageGame } from '../actions/manageGame'
-import GameBoard from '../components/GameBoard/GameBoard'
+import App from '../components/App/App'
 
 /*
 **  GameBoardContainer est un container : il contiendra le components GameBoard.
@@ -19,7 +18,7 @@ import GameBoard from '../components/GameBoard/GameBoard'
 */
 
 const mapStateToProps = state => ({
-  board: state.move.provisionalArray
+  error: state.manageGame.error
 })
 
 
@@ -30,8 +29,6 @@ const mapStateToProps = state => ({
 */
 
 const mapDispatchToProps = dispatch => ({
-  move: moves => dispatch(move(moves)),
-  manageGame: option => dispatch(manageGame(option))
 })
 
 
@@ -44,4 +41,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(GameBoard)
+)(App)
