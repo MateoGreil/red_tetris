@@ -24,6 +24,8 @@ function connect(client) {
     console.log('gameIsBusy for ' + player.name + ' in ' + player.gameName)
     return null
   }
+  io.to(player.gameName).emit('PlayerNb', {PlayerNumber: games[player.gameName].players})
+  console.log("Player Number", games[player.gameName].players)
   return player
 }
 
@@ -45,7 +47,7 @@ io.sockets.on('connection', function(client) {
       client.leave(player.gameName)
       disconnect(player)
     });
-  
+
     client.on('start', () => {
       games[player.gameName].start(io)
     })

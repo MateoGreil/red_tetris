@@ -18,7 +18,7 @@ export const {
     username,
     gameName
 } = catchNamesFrom(document.location.hash)
-  
+
 export const socket = io.connect(SERVER_ADDRESS, {query: {
     username: username,
     gameName: gameName
@@ -32,6 +32,10 @@ export default function (dispatch, getState) {
 		console.log(getState().move.tetriminos)
 	});
 
+	socket.on('PlayerNb', data => {
+		getState().manageGame.players = data.PlayerNumber
+		console.log("players = ", getState().manageGame.players)
+	});
 	catchError(socket, getState, username, gameName)
 	// socket.on('dispatch', action => {
 	// 	/*

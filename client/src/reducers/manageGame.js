@@ -18,6 +18,7 @@ function start(state) {
 export default function manageGame(state = {
   username: username,
   gameName: gameName,
+  players: [username],
   socket: socket,
   error: null,
   start: false
