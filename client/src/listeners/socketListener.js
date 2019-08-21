@@ -28,13 +28,10 @@ export default function (dispatch, getState) {
 
 	socket.on('newPiece', data => {
 		getState().move.tetriminos.push(data.piece)
-		console.log("tetrimino:")
-		console.log(getState().move.tetriminos)
 	});
 
 	socket.on('PlayerNb', data => {
 		getState().manageGame.players = data.PlayerNumber
-		console.log("players = ", getState().manageGame.players)
 	});
 	catchError(socket, getState, username, gameName)
 	// socket.on('dispatch', action => {

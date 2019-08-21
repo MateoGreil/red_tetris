@@ -9,20 +9,13 @@ function modTetri(tetrimino, rot) {
     } 
 
     let size = tetrimino.piece.length - 1;
-    let tempTetri = tetrimino.piece.map(row => {return {...row}});//il faut copier en profondeur les variables
-
-    /* ca sert a r
-    for (let i = 0; tempTetri.piece[i]; i++) {
-        for (let j = 0; tempTetri.piece[i][j]; j++) {
-        tempTetri.piece[i][j] = 0;
-        };
-    }*/
+    let tempTetri = tetrimino.piece.map(row => {return {...row}});
 
     if (rot === 1) {
         for (let i = 0; tempTetri[i] != null; i++) {
-        for (let j = 0; tempTetri[i][j] != null; j++) {
-            tetrimino.piece[i][j] = tempTetri[size - j][i]
-        }
+            for (let j = 0; tempTetri[i][j] != null; j++) {
+                tetrimino.piece[i][j] = tempTetri[size - j][i]
+            }
         }
     }
 
@@ -34,7 +27,6 @@ function modTetri(tetrimino, rot) {
         }
     }
 
-    console.log(tetrimino.piece)
     return (tetrimino);
 }
 

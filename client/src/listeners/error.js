@@ -1,6 +1,5 @@
 export default function catchError(socket, getState, username, gameName) {
     socket.on('gameIsBusy', () => {
-		console.log('gameIsBusy')
 		getState().manageGame.error = "ERROR: game is busy"
 	})
 

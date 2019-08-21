@@ -5,7 +5,6 @@ import { username, gameName, socket } from '../listeners/socketListener'
 const { START, ASK_FOR_NEW_PIECE } = Options
 
 function start(state) {
-  console.log('emitting start')
   state.socket.emit('start')
   return {...state, start: true}
 }

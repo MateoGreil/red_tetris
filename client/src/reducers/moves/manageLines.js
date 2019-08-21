@@ -17,8 +17,7 @@ function checkLines(array){
     if (checkRow(row))
       rowsToDelete.push(rowNb)
   });
-  console.log('rowsToDelete=')
-  console.log(rowsToDelete)
+
   return (rowsToDelete);
 }
 
@@ -38,8 +37,8 @@ export default function deleteLines(array) {
     let rowsToDelete = checkLines(array);
     
     for (var i = 0; i < rowsToDelete.length; i++) {
-      for (var i = rowsToDelete[i]; i > 1; i--) {
-        array = copyRow(array, i - 1, i)
+      for (var row = rowsToDelete[i]; row > 1; row--) {
+        array = copyRow(array, row - 1, row)
       }
       array = deleteFirstRow(array)
     }

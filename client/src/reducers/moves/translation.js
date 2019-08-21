@@ -80,7 +80,6 @@ export function translateDown(state) {
 
     state.tetriminos.shift()
     if (state.tetriminos.length == 0) {
-        console.log(socket)
         socket.emit('askForNewPiece', {})
     }
     return {...state, array: provisionalArray.map(row => row.map(value => {return value})), provisionalArray: provisionalArray}
