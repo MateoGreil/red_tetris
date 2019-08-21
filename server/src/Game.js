@@ -35,8 +35,8 @@ class Game {
 
     sendNewPiece(io) {
         console.log("sending new piece to " + this.name)
-        let piece = new Piece
-        io.to(this.name).emit('newPiece', {piece: piece})
+        io.to(this.name).emit('newPiece', {piece: new Piece})
+        io.to(this.name).emit('newPiece', {piece: new Piece})
     }
 }
 

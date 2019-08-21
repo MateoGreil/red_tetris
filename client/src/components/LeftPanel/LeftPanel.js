@@ -1,6 +1,8 @@
 import React from 'react';
 import './LeftPanel.css'
-export default function LeftPanel({players, user, gameName}){
+import Shapes from './Shapes/Shapes'
+
+export default function LeftPanel({players, user, gameName, nextPiece}){
     return (
     <div className='LeftPanel'>
         <div className='bloc'>
@@ -18,8 +20,8 @@ export default function LeftPanel({players, user, gameName}){
         <div className='bloc'>
             Time : 00:07
         </div>
-        <div className='bloc'>
-            Next Piece :
+        <div className='bloc' style={{heigth:"200px"}}>
+            Next Piece :  "{nextPiece ? <Shapes shapes={nextPiece.piece} /> : '' }"
         </div>
     </div>
     )

@@ -8,9 +8,11 @@
   }
 
 .bloc {
-    padding: 10px; /* aération interne des blocs */
+    padding: 20px; /* aération interne des blocs */
     border:1px solid #fff;
     display: flex;
     vertical-align:center;
     text-align:center;
+    align-items: center;
+    height: 30px;
   }
