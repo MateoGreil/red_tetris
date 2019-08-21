@@ -75,7 +75,7 @@ export function translateDown(state) {
     **  puisque provisionalArray contient la piece en mouvement, mais cette derniere etant au maximum en bas qu'
     **  elle puisse, elle se retrouve donc immobile, figer a jamais dans l'array :)
     */
-    var provisionalArray = deleteLines(state.provisionalArray);
+    var provisionalArray = deleteLines(state.provisionalArray, state.socket, state.gameName);
     //provisionalArray = reorganizeLines (array);
 
     state.tetriminos.shift()

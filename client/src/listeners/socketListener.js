@@ -33,6 +33,7 @@ export default function (dispatch, getState) {
 	socket.on('PlayerNb', data => {
 		getState().manageGame.players = data.PlayerNumber
 	});
+
 	catchError(socket, getState, username, gameName)
 	// socket.on('dispatch', action => {
 	// 	/*

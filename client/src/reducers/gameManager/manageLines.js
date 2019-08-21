@@ -33,11 +33,12 @@ function deleteFirstRow(array) {
   return array
 }
 
-export default function deleteLines(array) {
+export default function deleteLines(array, socket, gameName) {
     let rowsToDelete = checkLines(array);
     
     if (rowsToDelete.length > 1) {
-      
+      console.log('emit add row')
+      socket.broadcast.to(gameName).emit('addRowToAdvers', rowsToDelete.length)
     }
     for (var i = 0; i < rowsToDelete.length; i++) {
       for (var row = rowsToDelete[i]; row > 1; row--) {

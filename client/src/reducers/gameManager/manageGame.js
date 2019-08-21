@@ -92,7 +92,7 @@ function start(state) {
 }
 
 export default function manageGame(state = initialState, action) {
-  if (state.start && state.tetriminos[0]) {
+  if (state.tetriminos[0]) {
     switch (action.type) {
       case GAME_MANAGER:
         switch(action.option) {

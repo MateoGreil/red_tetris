@@ -18,7 +18,8 @@ import GameBoard from '../components/GameBoard/GameBoard'
 */
 
 const mapStateToProps = state => ({
-  board: state.manageGame.provisionalArray
+  board: state.manageGame.provisionalArray,
+  p1: state.manageGame.players[0].name == state.manageGame.username ? true : false
 })
 
 

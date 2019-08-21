@@ -17,7 +17,7 @@ const {
 
 
 
-function GameBoard({ board, move, manageGame }) {
+function GameBoard({ board, manageGame, p1 }) {
 
   /*
   **  handleKeyPress est la fonction qui permettra de decider en fonction de l'evenement, le
@@ -37,7 +37,7 @@ function GameBoard({ board, move, manageGame }) {
       manageGame(CLOCKWORK_ROTATION)
     else if (event.key === 'q')
       manageGame(COUNTER_CLOCKWORK_ROTATION)
-    else if (event.key === 'r')
+    else if (event.key === 'r' && p1)
       manageGame(START)
   };
 
