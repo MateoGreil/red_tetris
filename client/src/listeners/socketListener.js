@@ -1,5 +1,11 @@
 import io from 'socket.io-client'
 import catchError from './error'
+import { manageGame } from '../actions/manageGame';
+import { Options } from '../actions/manageGame'
+
+const {
+	ADD_ROW
+} = Options
 
 const SERVER_ADDRESS = 'localhost:8000'
 
@@ -33,6 +39,11 @@ export default function (dispatch, getState) {
 	socket.on('PlayerNb', data => {
 		getState().manageGame.players = data.PlayerNumber
 	});
+
+	socket.on('addRow', data => {
+		for (let i = 0; i < data; i++)
+			dispatch(manageGame(ADD_ROW))
+	})
 
 	catchError(socket, getState, username, gameName)
 	// socket.on('dispatch', action => {

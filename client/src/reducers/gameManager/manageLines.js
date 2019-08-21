@@ -26,9 +26,9 @@ function copyRow(array, from, to) {
   return array
 }
 
-function deleteFirstRow(array) {
-  array[0].forEach(element => {
-    element = 0
+function replaceRow(array, rowNb, newNb) {
+  array[rowNb].forEach((element) => {
+    element = newNb
   })
   return array
 }
@@ -38,14 +38,25 @@ export default function deleteLines(array, socket, gameName) {
     
     if (rowsToDelete.length > 1) {
       console.log('emit add row')
-      socket.broadcast.to(gameName).emit('addRowToAdvers', rowsToDelete.length)
+      socket.emit('addRowToAdvers', rowsToDelete.length)
     }
     for (var i = 0; i < rowsToDelete.length; i++) {
       for (var row = rowsToDelete[i]; row > 1; row--) {
         array = copyRow(array, row - 1, row)
       }
-      array = deleteFirstRow(array)
+      array = replaceRow(array, 0, 0)
     }
 
     return (array);
+}
+
+export function addRow(state) {
+  console.log('addRow')
+  let array = state.array
+  for (let i = 0; i + 1 < array.length; i++) {
+    array = copyRow(array, i + 1, i)
+  }
+  array = replaceRow(array, 19, 1);
+  console.log(array[19])
+  return {...state, array: array, provisionalArray: array.map(row => row.map(value => {return value}))}
 }
