@@ -27,7 +27,7 @@ export const socket = io.connect(SERVER_ADDRESS, {query: {
 export default function (dispatch, getState) {
 
 	socket.on('newPiece', data => {
-		getState().move.tetriminos.push(data.piece)
+		getState().manageGame.tetriminos.push(data.piece)
 	});
 
 	socket.on('PlayerNb', data => {

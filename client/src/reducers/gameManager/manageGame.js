@@ -1,5 +1,5 @@
 
-import { MOVE, Moves } from '../../actions/moves'
+import { GAME_MANAGER, Options } from '../../actions/manageGame'
 import {
   translateRight,
   translateLeft,
@@ -10,6 +10,11 @@ import {
   rotateRight,
   rotateLeft
 } from './rotation'
+import {
+  username,
+  gameName,
+  socket
+} from '../../listeners/socketListener'
 
 const {
   RIGHT_TRANSLATION,
@@ -17,16 +22,17 @@ const {
   DOWN_TRANSLATION,
   BOTTOM_TRANSLATION,
   CLOCKWORK_ROTATION,
-  COUNTER_CLOCKWORK_ROTATION
-} = Moves
+  COUNTER_CLOCKWORK_ROTATION,
+
+  START
+} = Options
 
 /*
 **  move est mon reducer, c'est ce dernier qui sera appelé par la fonction dispatch.
 **  "state = {...}"" permet d'initialiser les states s'ils ne le sont pas.
 */
 
-
-export default function move(state = {
+const initialState = {
   tetriminos: [],
   array: [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -71,12 +77,25 @@ export default function move(state = {
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-  ]
-}, action) {
-  if (state.tetriminos[0]) {
+  ],
+  username: username,
+  gameName: gameName,
+  players: [username],
+  socket: socket,
+  error: null,
+  start: false
+}
+
+function start(state) {
+  state.socket.emit('start')
+  return {...state, start: true}
+}
+
+export default function manageGame(state = initialState, action) {
+  if (state.start && state.tetriminos[0]) {
     switch (action.type) {
-      case MOVE:
-        switch(action.move) {
+      case GAME_MANAGER:
+        switch(action.option) {
           case RIGHT_TRANSLATION:
             return translateRight(state);
           case LEFT_TRANSLATION:
@@ -94,7 +113,9 @@ export default function move(state = {
       }
       default:
         return {...state}
-    }
+    } 
+  } else if (action.type == GAME_MANAGER && action.option == START) {
+    return start(state);
   }
   return {...state}
 }

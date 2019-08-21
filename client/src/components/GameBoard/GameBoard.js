@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Row from '../Rows/Row'
 import './GameBoard.css'
-import { Moves } from '../../actions/moves'
 import { Options } from '../../actions/manageGame'
 
 const {
@@ -11,12 +10,11 @@ const {
   DOWN_TRANSLATION,
   BOTTOM_TRANSLATION,
   CLOCKWORK_ROTATION,
-  COUNTER_CLOCKWORK_ROTATION
-} = Moves
+  COUNTER_CLOCKWORK_ROTATION,
 
-const {
   START
 } = Options
+
 
 
 function GameBoard({ board, move, manageGame }) {
@@ -28,17 +26,17 @@ function GameBoard({ board, move, manageGame }) {
 
   var handleKeyPress = (event) => {
     if(event.key === 'd')
-      move(RIGHT_TRANSLATION)
+      manageGame(RIGHT_TRANSLATION)
     else if (event.key === 'a')
-      move(LEFT_TRANSLATION)
+      manageGame(LEFT_TRANSLATION)
     else if (event.key === 's')
-      move(DOWN_TRANSLATION)
+      manageGame(DOWN_TRANSLATION)
     else if (event.key === ' ')
-      move(BOTTOM_TRANSLATION)
+      manageGame(BOTTOM_TRANSLATION)
     else if (event.key === 'e')
-      move(CLOCKWORK_ROTATION)
+      manageGame(CLOCKWORK_ROTATION)
     else if (event.key === 'q')
-      move(COUNTER_CLOCKWORK_ROTATION)
+      manageGame(COUNTER_CLOCKWORK_ROTATION)
     else if (event.key === 'r')
       manageGame(START)
   };
@@ -59,7 +57,7 @@ function GameBoard({ board, move, manageGame }) {
 
       let interval = null;
       interval = setInterval(() => {
-        move(DOWN_TRANSLATION)
+        manageGame(DOWN_TRANSLATION)
       }, 300);
 
 

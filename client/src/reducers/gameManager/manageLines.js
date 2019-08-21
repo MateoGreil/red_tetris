@@ -36,6 +36,9 @@ function deleteFirstRow(array) {
 export default function deleteLines(array) {
     let rowsToDelete = checkLines(array);
     
+    if (rowsToDelete.length > 1) {
+      
+    }
     for (var i = 0; i < rowsToDelete.length; i++) {
       for (var row = rowsToDelete[i]; row > 1; row--) {
         array = copyRow(array, row - 1, row)
