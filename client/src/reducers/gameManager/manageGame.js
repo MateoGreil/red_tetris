@@ -82,7 +82,7 @@ const initialState = {
   ],
   username: username,
   gameName: gameName,
-  players: [username],
+  players: [{name: username, array: []}],
   socket: socket,
   error: null,
   start: false

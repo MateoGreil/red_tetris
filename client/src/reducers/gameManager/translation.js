@@ -81,6 +81,7 @@ export function translateDown(state) {
     if (state.tetriminos.length <= 1) {
         socket.emit('askForNewPiece', {})
     }
+    socket.emit('array', provisionalArray)
     return {...state, array: provisionalArray.map(row => row.map(value => {return value})), provisionalArray: provisionalArray}
 }
 
@@ -91,5 +92,5 @@ export function translateDown(state) {
             state = translateDown(state);
         }
 
-        return {...state, array: state.provisionalArray.map(row => row.map(value => {return value}))}
+    return {...state, array: state.provisionalArray.map(row => row.map(value => {return value}))}
 }

@@ -24,7 +24,7 @@ function connect(client) {
     console.log('gameIsBusy for ' + player.name + ' in ' + player.gameName)
     return null
   }
-  io.to(player.gameName).emit('PlayerNb', {PlayerNumber: games[player.gameName].players})
+  io.to(player.gameName).emit('players', games[player.gameName].players)
   console.log("Player Number", games[player.gameName].players)
   return player
 }
@@ -36,6 +36,21 @@ function disconnect(player) {
     games[player.gameName] = null;
     console.log("Game " + player.gameName + " is removed.");
   }
+}
+
+function arraySpectrum(array) {
+  for (let i = 0; i < array[0].length; i++) {
+    let isGrey = false
+    for (let j = 0; j < array.length; j++) {
+      if (isGrey)
+        array[j][i] = 8
+      else if (array[j][i]) {
+        isGrey = true
+        array[j][i] = 8
+      }
+    }
+  }
+  return array
 }
 
 //connexion au client
@@ -58,6 +73,11 @@ io.sockets.on('connection', function(client) {
 
     client.on('addRowToAdvers', (nbOfRowToAdd) => {
       client.broadcast.to(player.gameName).emit('addRow', nbOfRowToAdd)
+    })
+
+    client.on('array', array => {
+      player.array = arraySpectrum(array)
+      io.to(player.gameName).emit('players', games[player.gameName].players)
     })
   }
 
