@@ -115,7 +115,7 @@ const tetriminos = {
 
 class Piece {    
   constructor() {
-    let pieceNb = 1//ath.floor((Math.random() * 7) + 1)
+    let pieceNb = Math.floor((Math.random() * 7) + 1)
     this.color = tetriminos[pieceNb].color
     this.piece = tetriminos[pieceNb].piece
     this.name = tetriminos[pieceNb].name
