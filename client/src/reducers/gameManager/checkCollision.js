@@ -10,14 +10,14 @@ export default function checkCollision(tetrimino, array) {
 
   tetrimino.piece.forEach((rowPiece, i) => {
     rowPiece.forEach((square, j) => {
-      console.log(square)
-      if (tetrimino.position.y + i < 0)
+      // console.log("pos = ", tetrimino.position.y, "height =", tetrimino.height)
+      if (tetrimino.position.y + tetrimino.height < 0)
         gameover = true
       if (square && (tetrimino.position.y + i >= 20 || tetrimino.position.x + j >= 10 || tetrimino.position.x + j < 0 || (tetrimino.position.y + i >= 0 && array[tetrimino.position.y + i][tetrimino.position.x + j]))) {
         check = 1
       }
     });
   });
-
+  // console.log(check, gameover, tetrimino.position.y, tetrimino.name)
   return (gameover && check ? 2 : check);
 }

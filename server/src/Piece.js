@@ -17,7 +17,8 @@ const tetriminos = {
     position : {
       x: 3,
       y: 0
-    }
+    },
+    height: -1
   },
   1 : {
       name: "I",
@@ -31,7 +32,8 @@ const tetriminos = {
       position: {
           x: 3,
           y: -4
-      }
+      },
+      height: 0
   },
   2 : {
       name: "O",
@@ -43,7 +45,8 @@ const tetriminos = {
       position: {
           x: 4,
           y: -2
-      }
+      },
+      height: -1
   },
   3 : {
       name: "T",
@@ -56,7 +59,8 @@ const tetriminos = {
       position: {
           x: 3,
           y: -3
-      }
+      },
+      height: -1
   },
   4 : {
       name: "S",
@@ -70,7 +74,8 @@ const tetriminos = {
       position: {
           x: 3,
           y: -3
-      }
+      },
+      height: -1
   },
   5 : {
       name: "Z",
@@ -83,7 +88,8 @@ const tetriminos = {
       position: {
           x: 3,
           y: -3
-      }
+      },
+      height: -1
   },
   6 : {
       name: "J",
@@ -96,7 +102,8 @@ const tetriminos = {
       position: {
           x: 3,
           y: -3
-      }
+      },
+      height: -1
   },
   7 : {
       name: "L",
@@ -109,7 +116,8 @@ const tetriminos = {
       position: {
           x: 3,
           y: -3
-      }
+      },
+      height: -1
   }
 }
 
@@ -120,6 +128,8 @@ class Piece {
     this.piece = tetriminos[pieceNb].piece
     this.name = tetriminos[pieceNb].name
     this.position = tetriminos[pieceNb].position
+    this.height = tetriminos[pieceNb].height
+
   }
 }
 
