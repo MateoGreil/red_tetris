@@ -22,7 +22,6 @@ function GameBoard({ board, manageGame, gameManager }) {
   **  handleKeyPress est la fonction qui permettra de decider en fonction de l'evenement, le
   **  mouvement a produire.
   */
-
   var handleKeyPress = (event) => {
     if(event.key === 'd')
       manageGame(RIGHT_TRANSLATION)
