@@ -68,6 +68,8 @@ export function translateDown(state) {
     if (!check) {
         return {...state, provisionalArray: putPieceInGame(state.array.map(row => row.map(value => {return value})), tetrimino)};
     }
+    else if (check === 2)
+        console.log("GAME OVER")
 
     /*
     **  sinon, ça veut dire que la piece ne pourra plus descendre. On retourne donc notre state a jour :

@@ -1,5 +1,5 @@
 export default function checkCollision(tetrimino, array) {
-  var check = false
+  var check = 0
 
   /*
   **  pour chaque partie de la piece, va verifier si sa nouvelle position est deja prise par quelque chose
@@ -8,12 +8,15 @@ export default function checkCollision(tetrimino, array) {
   */
 
   tetrimino.piece.map((rowPiece, i) => {
-      rowPiece.map((square, j) => {
-          if (square && (tetrimino.position.y + i >= 20 || tetrimino.position.x + j >= 10 || tetrimino.position.x + j < 0 || (tetrimino.position.y + i >= 0 && array[tetrimino.position.y + i][tetrimino.position.x + j]))) {
-              check = true
-          }
-      });
-  });
+    rowPiece.map((square, j) => {
+        if (square && (tetrimino.position.y + i >= 20 || tetrimino.position.x + j >= 10 || tetrimino.position.x + j < 0 || (tetrimino.position.y + i >= 0 && array[tetrimino.position.y + i][tetrimino.position.x + j]))) {
+              check = 1
+              if (tetrimino.position.y + i <= 0)
+                check = 2
+            }
+
+        });
+        console.log("i = ", i, "check = ", check, "   position = ",  tetrimino.position.y)
+    });
   return check;
 }
-  
