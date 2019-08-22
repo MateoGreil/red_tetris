@@ -5,7 +5,7 @@
 
 function checkRow(row) {
   for (var i = 0; i < row.length; i++) {
-    if (!row[i])
+    if (!row[i] || row[i] == 8)
       return false
   }
   return true
@@ -22,14 +22,17 @@ function checkLines(array){
 }
 
 function copyRow(array, from, to) {
-  array[to] = array[from]
+  array[to].forEach((element, i) => {
+    array[to][i] = array[from][i]
+  })
   return array
 }
 
 function replaceRow(array, rowNb, newNb) {
-  array[rowNb].forEach((element) => {
-    element = newNb
+  array[rowNb].forEach((element, i) => {
+    array[rowNb][i] = newNb
   })
+  console.log(array)
   return array
 }
 
@@ -37,8 +40,7 @@ export default function deleteLines(array, socket, gameName) {
     let rowsToDelete = checkLines(array);
     
     if (rowsToDelete.length > 1) {
-      console.log('emit add row')
-      socket.emit('addRowToAdvers', rowsToDelete.length)
+      socket.emit('addRowToAdvers', rowsToDelete.length - 1)
     }
     for (var i = 0; i < rowsToDelete.length; i++) {
       for (var row = rowsToDelete[i]; row > 1; row--) {
@@ -51,12 +53,12 @@ export default function deleteLines(array, socket, gameName) {
 }
 
 export function addRow(state) {
-  console.log('addRow')
   let array = state.array
-  for (let i = 0; i + 1 < array.length; i++) {
-    array = copyRow(array, i + 1, i)
+
+  for (let i = 1; i < array.length; i++) {
+    array = copyRow(array, i, i - 1)
   }
-  array = replaceRow(array, 19, 1);
-  console.log(array[19])
+  array = replaceRow(array, 19, 8);
+
   return {...state, array: array, provisionalArray: array.map(row => row.map(value => {return value}))}
 }

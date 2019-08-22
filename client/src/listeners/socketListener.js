@@ -41,8 +41,9 @@ export default function (dispatch, getState) {
 	});
 
 	socket.on('addRow', data => {
-		for (let i = 0; i < data; i++)
+		for (let i = 0; i < data; i++) {
 			dispatch(manageGame(ADD_ROW))
+		}
 	})
 
 	catchError(socket, getState, username, gameName)

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Row from '../Rows/Row'
+import Row from './Rows/Row'
 import './GameBoard.css'
 import { Options } from '../../actions/manageGame'
 
