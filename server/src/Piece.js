@@ -23,8 +23,8 @@ const tetriminos = {
       name: "I",
       color: colors.lightBlue,
       piece: [
-          [0, 0, 0, 0],
           [1, 1, 1, 1],
+          [0, 0, 0, 0],
           [0, 0, 0, 0],
           [0, 0, 0, 0]
       ],

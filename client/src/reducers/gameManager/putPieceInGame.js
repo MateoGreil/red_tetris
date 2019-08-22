@@ -4,16 +4,16 @@
 
 export default function putPieceInGame(rows, tetrimino) {
     if (tetrimino) {
-        let i = 0;
-        while (tetrimino.piece[i] != null) {
-            let j = 0;
-            while (tetrimino.piece[i][j] != null) {
-                if (i + tetrimino.position.y >= 0 && tetrimino.piece[i][j] != 0) {
-                    rows[i + tetrimino.position.y][j + tetrimino.position.x] = tetrimino.piece[i][j];
+        let y = 0
+        while (tetrimino.piece[y] != null) {
+            let x = 0
+            while (tetrimino.piece[y][x] != null) {
+                if (y + tetrimino.position.y >= 0 && tetrimino.piece[y][x] != 0) {
+                    rows[y + tetrimino.position.y][x + tetrimino.position.x] = tetrimino.piece[y][x]
                 }
-                j++;
+                x++
             }
-            i++;
+            y++;
         }
     }
     return (rows);

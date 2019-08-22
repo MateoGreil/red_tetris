@@ -21,7 +21,6 @@ function Row(props) {
     for (var i = 0; i < 10; i++) {
         uiRow.push(<square style={{backgroundColor: colors[row[i]]}}/>)
     }
-
     return (
         <div className="Row">
             {uiRow}
