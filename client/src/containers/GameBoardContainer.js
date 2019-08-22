@@ -18,7 +18,8 @@ import GameBoard from '../components/GameBoard/GameBoard'
 */
 
 const mapStateToProps = state => ({
-  board: state.manageGame.provisionalArray
+  gameManager: state.manageGame,
+  board: state.manageGame.provisionalArray,
 })
 
 

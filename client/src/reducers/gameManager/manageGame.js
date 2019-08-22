@@ -15,6 +15,7 @@ import {
   gameName,
   socket
 } from '../../listeners/socketListener'
+import { addRow } from './manageLines'
 
 const {
   RIGHT_TRANSLATION,
@@ -24,7 +25,8 @@ const {
   CLOCKWORK_ROTATION,
   COUNTER_CLOCKWORK_ROTATION,
 
-  START
+  START,
+  ADD_ROW
 } = Options
 
 /*
@@ -92,7 +94,7 @@ function start(state) {
 }
 
 export default function manageGame(state = initialState, action) {
-  if (state.start && state.tetriminos[0]) {
+  if (state.tetriminos[0]) {
     switch (action.type) {
       case GAME_MANAGER:
         switch(action.option) {
@@ -108,6 +110,8 @@ export default function manageGame(state = initialState, action) {
             return rotateRight(state);
           case COUNTER_CLOCKWORK_ROTATION:
             return rotateLeft(state)
+          case ADD_ROW:
+            return addRow(state)
           default:
             return {...state}
       }

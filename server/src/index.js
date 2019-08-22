@@ -55,6 +55,10 @@ io.sockets.on('connection', function(client) {
     client.on('askForNewPiece', () => {
       games[player.gameName].sendNewPiece(io)
     })
+
+    client.on('addRowToAdvers', (nbOfRowToAdd) => {
+      client.broadcast.to(player.gameName).emit('addRow', nbOfRowToAdd)
+    })
   }
 
 });

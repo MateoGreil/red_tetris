@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Row from '../Rows/Row'
+import Row from './Rows/Row'
 import './GameBoard.css'
 import { Options } from '../../actions/manageGame'
 
@@ -17,8 +17,7 @@ const {
 
 
 
-function GameBoard({ board, move, manageGame }) {
-
+function GameBoard({ board, manageGame, gameManager }) {
   /*
   **  handleKeyPress est la fonction qui permettra de decider en fonction de l'evenement, le
   **  mouvement a produire.
@@ -37,8 +36,9 @@ function GameBoard({ board, move, manageGame }) {
       manageGame(CLOCKWORK_ROTATION)
     else if (event.key === 'q')
       manageGame(COUNTER_CLOCKWORK_ROTATION)
-    else if (event.key === 'r')
+    else if (event.key === 'r' && gameManager.username == gameManager.players[0].name) {
       manageGame(START)
+    }
   };
 
 
