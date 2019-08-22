@@ -1,5 +1,5 @@
-function checkIfExist(currentValue) {
-  return currentValue ? true : false
+function checkIfNotExist(currentValue) {
+  return currentValue ? false : true
 }
 
 export default function checkCollision(tetrimino, array) {
@@ -15,7 +15,7 @@ export default function checkCollision(tetrimino, array) {
     rowPiece.forEach((square, j) => {
       //console.log(tetrimino.piece[j].every(checkIfExist))
       // tetrimino.piece[j].every(checkIfExist) && 
-      if (tetrimino.position.y + i - 1 < 0)
+      if (!rowPiece.every(checkIfNotExist) && tetrimino.position.y + i - 1 < 0)
         gameover = true
       if (square && (tetrimino.position.y + i >= 20 || tetrimino.position.x + j >= 10 || tetrimino.position.x + j < 0 || (tetrimino.position.y + i >= 0 && array[tetrimino.position.y + i][tetrimino.position.x + j]))) {
         check = 1
