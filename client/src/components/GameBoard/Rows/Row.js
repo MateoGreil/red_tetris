@@ -2,7 +2,7 @@ import React from 'react'
 import './Row.css'
 
 const colors = {
-    0: "#ffffff",
+    0: "#ffffffb0",
     1: "#00D9DA",
     2: "#E6E703",
     3: "#9400DE",

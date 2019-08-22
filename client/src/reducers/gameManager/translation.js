@@ -78,7 +78,7 @@ export function translateDown(state) {
     var provisionalArray = deleteLines(state.provisionalArray, socket, state.gameName);
 
     state.tetriminos.shift()
-    if (state.tetriminos.length == 0) {
+    if (state.tetriminos.length <= 1) {
         socket.emit('askForNewPiece', {})
     }
     return {...state, array: provisionalArray.map(row => row.map(value => {return value})), provisionalArray: provisionalArray}

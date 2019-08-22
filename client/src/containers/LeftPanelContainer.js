@@ -10,7 +10,8 @@ import {connect} from 'react-redux'
 const mapStateToProps = state => ({
     players: state.manageGame.players,
     user: state.manageGame.username,
-    gameName: state.manageGame.gameName
+    gameName: state.manageGame.gameName,
+    nextPiece: state.manageGame.tetriminos[1]
   })
 
 export default connect(

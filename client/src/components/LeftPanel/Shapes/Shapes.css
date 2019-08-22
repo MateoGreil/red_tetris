@@ -1,0 +1,9 @@
+.Shapes {
+    display:flex;
+    flex-wrap: wrap;
+}
+
+cube {
+    height: 15px;
+    width: 15px;
+}
