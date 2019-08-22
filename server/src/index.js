@@ -62,6 +62,7 @@ io.sockets.on('connection', function(client) {
 
     client.on('GAMEOVER', () => {
       disconnect(player)
+
     })
   }
 
