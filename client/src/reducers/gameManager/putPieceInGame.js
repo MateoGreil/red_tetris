@@ -7,9 +7,9 @@ export default function putPieceInGame(rows, tetrimino) {
         let i = 0;
         while (tetrimino.piece[i] != null) {
             let j = 0;
-            while (tetrimino.piece[i][j] != null) {//ajouter if piece.piece[i][j] != 0
+            while (tetrimino.piece[i][j] != null) {
                 if (i + tetrimino.position.y >= 0 && tetrimino.piece[i][j] != 0) {
-                rows[i + tetrimino.position.y][j + tetrimino.position.x] = tetrimino.piece[i][j];
+                    rows[i + tetrimino.position.y][j + tetrimino.position.x] = tetrimino.piece[i][j];
                 }
                 j++;
             }

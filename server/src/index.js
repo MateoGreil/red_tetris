@@ -59,6 +59,11 @@ io.sockets.on('connection', function(client) {
     client.on('addRowToAdvers', (nbOfRowToAdd) => {
       client.broadcast.to(player.gameName).emit('addRow', nbOfRowToAdd)
     })
+
+    client.on('GAMEOVER', () => {
+      disconnect(player)
+
+    })
   }
 
 });
