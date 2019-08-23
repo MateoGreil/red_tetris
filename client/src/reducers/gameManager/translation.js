@@ -76,7 +76,6 @@ export function translateDown(state) {
     **  elle puisse, elle se retrouve donc immobile, figer a jamais dans l'array :)
     */
     var provisionalArray = deleteLines(state.provisionalArray, socket, state.gameName);
-
     state.tetriminos.shift()
     if (state.tetriminos.length <= 1) {
         socket.emit('askForNewPiece', {})
