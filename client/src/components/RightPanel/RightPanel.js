@@ -4,11 +4,11 @@ import Row from '../GameBoard/Rows/Row';
 
 function Array({ array, username }) {
     return (
-        <div className='Array'>
-        {username}
-        {
+        <div className='ArrayAndUsername'>
+          {username}
+          {
             array.map((row, i) => <Row row={row} key={i} size={'10px'}/>)
-        }
+          }
         </div>
     )
 }
