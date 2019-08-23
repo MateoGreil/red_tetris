@@ -83,7 +83,7 @@ function GameBoard({ board, manageGame, gameManager }) {
         **  un <Row/>. C'est la facon propre de faire ce que j'ai fait tres salement dans Row.js.
         */
 
-        board.map((row, i) => <Row row={row} key={i}/>)
+        board.map((row, i) => <Row row={row} key={i} size={'calc((100vh - 8px) / 20)'}/>)
       }
     </div>
   )

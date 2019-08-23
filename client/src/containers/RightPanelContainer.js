@@ -15,7 +15,9 @@ import {connect} from 'react-redux'
 **    })
 */
 
-
+const mapStateToProps = state => ({
+    manageGame: state.manageGame
+  })
 
 /*
 **  connect est simplement la fonction qui va permettre de connecter tout ça ensemble
@@ -24,4 +26,5 @@ import {connect} from 'react-redux'
 */
 
 export default connect(
+    mapStateToProps
 )(RightPanel)

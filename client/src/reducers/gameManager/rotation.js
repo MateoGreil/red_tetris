@@ -40,7 +40,7 @@ export function rotateRight(state) {
     if (!check) {
         return {...state, tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
     }
-
+    tetrimino = modTetri(tetrimino, 2)
     // sinon, retourne le meme state qu'avant, par consequent la piece n'aura pas bouger
     return {...state};
 }
@@ -56,6 +56,7 @@ export function rotateLeft(state) {
         return {...state, tetrimino: tetrimino, array: array, provisionalArray: putPieceInGame(array.map(row => row.map(value => {return value})), tetrimino)};
     }
 
+    tetrimino = modTetri(tetrimino, 1);
     // sinon, retourne le meme state qu'avant, par consequent la piece n'aura pas bouger
     return {...state};
 }

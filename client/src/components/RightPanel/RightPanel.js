@@ -1,17 +1,22 @@
 import React from 'react';
 import './RightPanel.css'
-export default function RightPanel(){
+import Row from '../GameBoard/Rows/Row';
+
+function Array({ array, username }) {
     return (
-    <div className='RightPanel'>
-        <div className='Player_Spectre'>
-            CARRE 1
+        <div className='ArrayAndUsername'>
+          {username}
+          {
+            array.map((row, i) => <Row row={row} key={i} size={'10px'}/>)
+          }
         </div>
-        <div className='Player_Spectre'>
-            CARRE 2
-        </div>
-        <div className='Player_Spectre'>
-            CARRE 3
-        </div>
+    )
+}
+
+export default function RightPanel({ manageGame }) {
+    return (
+    <div className={'RightPanel'}> 
+        {manageGame.players.map(player => <Array array={player.array} username={player.name}/>)}
     </div>
     )
 }

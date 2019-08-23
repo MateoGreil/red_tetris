@@ -19,7 +19,7 @@ function Row(props) {
     var uiRow = [];
 
     for (var i = 0; i < 10; i++) {
-        uiRow.push(<square style={{backgroundColor: colors[row[i]]}}/>)
+        uiRow.push(<div style={{backgroundColor: colors[row[i]], height: props.size, width: props.size}}/>)
     }
     return (
         <div className="Row">

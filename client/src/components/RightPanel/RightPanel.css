@@ -1,17 +1,14 @@
-.RightPanel {
-  background-color: hsla(204, 80%, 77%, 0.822);
+.ArrayAndUsername {
   border:4px solid #fff;
-  text-align:center;
-  align-items: flex;
-  width:auto;
-  display: inline-table;
+  background-color: hsla(204, 80%, 77%, 0.822);
+  text-align: center;
+  overflow-wrap: break-word;
+  width: 100px;
+}
 
-  }
-
-  .Player_Spectre {
-    padding: 10px; /* aération interne des blocs */
-    border:1px solid #fff;
-    display: flex;
-    vertical-align:center;
-    text-align:center;
-  }
+.RightPanel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
