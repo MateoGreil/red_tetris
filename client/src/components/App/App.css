@@ -1,6 +1,6 @@
 .App {
   background: black url(./Room.jpg) no-repeat center center fixed;
-  /*background-size: cover;*/
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: space-around;
