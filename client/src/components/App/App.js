@@ -14,6 +14,7 @@ function MainMenu() {
   function Submit() {
     if (room != '' && username != '')
       document.location.href = '#' + room + '[' + username + ']'
+      document.location.reload()
   }
 
   return (
@@ -36,7 +37,7 @@ function MainMenu() {
 }
 
 function App({ error }) {
-  
+
   if (error) {
     if (error.nb)
     return (<div>{ error.text }</div>)
