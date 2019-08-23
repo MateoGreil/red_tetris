@@ -35,8 +35,9 @@ function disconnect(player) {
   if (games[player.gameName].players.length == 0) {
     games[player.gameName] = null;
     console.log("Game " + player.gameName + " is removed.");
+  } else {
+    io.to(player.gameName).emit('players', games[player.gameName].players)
   }
-  io.to(player.gameName).emit('players', games[player.gameName].players)
 }
 
 function arraySpectrum(array) {
