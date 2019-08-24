@@ -80,6 +80,7 @@ io.sockets.on('connection', function(client) {
     client.on('gameOver', () => {
       player.gameOver = true
       io.to(player.gameName).emit('players', games[player.gameName].players)
+      client.leave(player.gameName)
     })
 
     client.on('array', array => {
