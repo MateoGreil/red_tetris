@@ -77,8 +77,9 @@ io.sockets.on('connection', function(client) {
       client.broadcast.to(player.gameName).emit('addRow', nbOfRowToAdd)
     })
 
-    client.on('GAMEOVER', () => {
-      disconnect(player)
+    client.on('gameOver', () => {
+      player.gameOver = true
+      io.to(player.gameName).emit('players', games[player.gameName].players)
     })
 
     client.on('array', array => {

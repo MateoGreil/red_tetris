@@ -26,6 +26,7 @@ class Player {
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         ]
+        this.gameOver = false
     }
 }
 
