@@ -60,7 +60,7 @@ export function translateLeft(state) {
 
 export function translateDown(state) {
     var tetrimino = state.tetriminos[0]
-  
+
     console.log(tetrimino.name)
     tetrimino.position.y++;
     const check = checkCollision(tetrimino, state.array);
@@ -69,8 +69,8 @@ export function translateDown(state) {
         return {...state, provisionalArray: putPieceInGame(state.array.map(row => row.map(value => {return value})), tetrimino)};
     }
     else if (check === 2){
-      console.log("GAMEOVER", tetrimino.name)
-      //socket.emit("GAMEOVER", {})
+      socket.emit('gameOver', {})
+      state.gameOver = true
     }
     /*
     **  sinon, ça veut dire que la piece ne pourra plus descendre. On retourne donc notre state a jour :
