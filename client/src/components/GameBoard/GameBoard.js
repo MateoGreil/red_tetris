@@ -77,9 +77,13 @@ function GameBoard({ board, manageGame, gameManager, gameOver }) {
   if (gameOver && gameOver===true) {
     console.log("GAMEOVER")
     return(
-     <div className="alert">
-       GAME OVER !
-      </div>)
+        <div className="GameBoard">
+          <div className="alert">GAME OVER ! </div>
+        {
+                  board.map((row, i) => <Row row={row} key={i} size={'calc((100vh - 8px) / 20)'}/>)
+        }
+      </div>
+     )
   }
   else{
     return (

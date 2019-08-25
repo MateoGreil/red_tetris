@@ -3,8 +3,15 @@
 }
 
 .alert {
-  padding: 20px;
+  padding: 2%;
+  border:8px solid #000;
+  position: absolute;
+  left: 45.5%; 
+  margin-top: 10%;
   background-color: #ce271b;
-  color: white;
+  color: rgb(235, 220, 220);
   margin-bottom: 10px;
+  text-align: center;
+  font-size: xx-large;
+  font-weight: bolder;
 }
