@@ -13,6 +13,6 @@
     display: flex;
     vertical-align:center;
     text-align:center;
-    align-items: center;
+    justify-content: center;
     height: 30px;
   }

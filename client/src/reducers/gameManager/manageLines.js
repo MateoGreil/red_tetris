@@ -44,7 +44,6 @@ function changeScore(score, lines) {
   else if (lines === 1)
     toAdd = 100;
   score += toAdd;
-  console.log("rows to del = ", lines, "score = ", score)
   return (score);
 }
 

@@ -69,25 +69,25 @@ export function translateDown(state) {
         return {...state, provisionalArray: putPieceInGame(state.array.map(row => row.map(value => {return value})), tetrimino)};
     }
     else if (check === 2){
-      socket.emit('gameOver', {})
-      state.gameOver = true
+        socket.emit('gameOver', {})
+        state.gameOver = true
     }
+    else
+        state.score += 5
+
     /*
     **  sinon, ça veut dire que la piece ne pourra plus descendre. On retourne donc notre state a jour :
     **  array, qui contient toutes les pieces qui sont immobiles et placer, prend la valeur de provisionalArray
     **  puisque provisionalArray contient la piece en mouvement, mais cette derniere etant au maximum en bas qu'
     **  elle puisse, elle se retrouve donc immobile, figer a jamais dans l'array :)
     */
-    let ret = deleteLines(state.provisionalArray, socket, state.score);
-    console.log(ret)
-    let provisionalArray = ret[0] 
-    state.score = ret[1]
+   let [provisionalArray, score] = deleteLines(state.provisionalArray, socket, state.score);
+    state.score = score
     state.tetriminos.shift()
     if (state.tetriminos.length <= 1) {
         socket.emit('askForNewPiece', {})
     }
     socket.emit('array', provisionalArray)
-    console.log("score in translation", state.score)
     return {...state, array: provisionalArray.map(row => row.map(value => {return value})), provisionalArray: provisionalArray}
 }
 

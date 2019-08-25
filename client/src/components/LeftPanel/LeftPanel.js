@@ -23,8 +23,12 @@ export default function LeftPanel({players, user, gameName, nextPiece, score}){
         <div className='bloc' style={{heigth:"200px"}}>
             Next Piece :  "{nextPiece ? <Shapes shapes={nextPiece.piece} /> : '' }"
         </div>
-        <div className='bloc' style={{heigth:"200px"}}>
-            Score :  "{score}"
+        <div className='bloc' 
+            style={
+                {backgroundColor: 'hsla(204, 82%, 37%, 0.822)', fontSize: '25px', color:'white', textAlign:'center',
+            fontWeight:'bolder'}
+            }>
+            Score : {score} 
         </div>
     </div>
     )
