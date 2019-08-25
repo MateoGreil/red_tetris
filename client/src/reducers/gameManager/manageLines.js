@@ -36,9 +36,20 @@ function replaceRow(array, rowNb, newNb) {
   return array
 }
 
-export default function deleteLines(array, socket, gameName) {
+function changeScore(score, lines) {
+  let toAdd = 0;
+  if (lines > 1) {
+    toAdd = 100 * 1.5 * lines;
+  }
+  else if (lines === 1)
+    toAdd = 100;
+  score += toAdd;
+  return (score);
+}
+
+export default function deleteLines(array, socket, score) {
     let rowsToDelete = checkLines(array);
-    
+    let newscore = changeScore(score, rowsToDelete.length)
     if (rowsToDelete.length > 1) {
       socket.emit('addRowToAdvers', rowsToDelete.length - 1)
     }
@@ -48,8 +59,8 @@ export default function deleteLines(array, socket, gameName) {
       }
       array = replaceRow(array, 0, 0)
     }
-
-    return (array);
+  console.log("rows to del = ", rowsToDelete.length, "score = ", score)    
+    return ([array, newscore]);
 }
 
 export function addRow(state) {

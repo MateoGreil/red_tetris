@@ -27,6 +27,7 @@ class Player {
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         ]
         this.points = 0
+        this.gameOver = false
     }
 }
 

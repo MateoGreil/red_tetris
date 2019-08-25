@@ -1,3 +1,17 @@
 .GameBoard {
   border:4px solid #000;
 }
+
+.alert {
+  padding: 2%;
+  border:8px solid #000;
+  position: absolute;
+  margin-inline-start: 6%; 
+  margin-top: 10%;
+  background-color: #ce271b;
+  color: rgb(235, 220, 220);
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: xx-large;
+  font-weight: bolder;
+}

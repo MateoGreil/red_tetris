@@ -60,7 +60,7 @@ export function translateLeft(state) {
 
 export function translateDown(state) {
     var tetrimino = state.tetriminos[0]
-  
+
     console.log(tetrimino.name)
     tetrimino.position.y++;
     const check = checkCollision(tetrimino, state.array);
@@ -69,16 +69,20 @@ export function translateDown(state) {
         return {...state, provisionalArray: putPieceInGame(state.array.map(row => row.map(value => {return value})), tetrimino)};
     }
     else if (check === 2){
-      console.log("GAMEOVER", tetrimino.name)
-      //socket.emit("GAMEOVER", {})
+        socket.emit('gameOver', {})
+        state.gameOver = true
     }
+    else
+        state.score += 5
+
     /*
     **  sinon, ça veut dire que la piece ne pourra plus descendre. On retourne donc notre state a jour :
     **  array, qui contient toutes les pieces qui sont immobiles et placer, prend la valeur de provisionalArray
     **  puisque provisionalArray contient la piece en mouvement, mais cette derniere etant au maximum en bas qu'
     **  elle puisse, elle se retrouve donc immobile, figer a jamais dans l'array :)
     */
-    var provisionalArray = deleteLines(state.provisionalArray, socket, state.gameName);
+   let [provisionalArray, score] = deleteLines(state.provisionalArray, socket, state.score);
+    state.score = score
     state.tetriminos.shift()
     if (state.tetriminos.length <= 1) {
         socket.emit('askForNewPiece', {})

@@ -85,7 +85,9 @@ const initialState = {
   players: [{name: username, array: []}],
   socket: socket,
   error: null,
-  start: false
+  start: false,
+  gameOver: false,
+  score : 0
 }
 
 function start(state) {
@@ -94,7 +96,7 @@ function start(state) {
 }
 
 export default function manageGame(state = initialState, action) {
-  if (state.tetriminos[0]) {
+  if (state.tetriminos[0] && state.gameOver === false) {
     switch (action.type) {
       case GAME_MANAGER:
         switch(action.option) {
@@ -117,7 +119,7 @@ export default function manageGame(state = initialState, action) {
       }
       default:
         return {...state}
-    } 
+    }
   } else if (action.type == GAME_MANAGER && action.option == START) {
     return start(state);
   }

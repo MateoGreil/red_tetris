@@ -17,25 +17,25 @@ const {
 
 
 
-function GameBoard({ board, manageGame, gameManager }) {
+function GameBoard({ board, manageGame, gameManager, gameOver }) {
   /*
   **  handleKeyPress est la fonction qui permettra de decider en fonction de l'evenement, le
   **  mouvement a produire.
   */
   var handleKeyPress = (event) => {
-    if(event.key === 'd')
+    if(event.key === 'ArrowRight' || event.key === 'd' || event.key === 'D')
       manageGame(RIGHT_TRANSLATION)
-    else if (event.key === 'a')
+    else if (event.key === 'ArrowLeft' || event.key === 'a' || event.key === 'A')
       manageGame(LEFT_TRANSLATION)
-    else if (event.key === 's')
+    else if (event.key === 'ArrowDown' || event.key === 's' || event.key === 'S')
       manageGame(DOWN_TRANSLATION)
     else if (event.key === ' ')
       manageGame(BOTTOM_TRANSLATION)
-    else if (event.key === 'e')
+    else if (event.key === 'c' || event.key === 'C' || event.key === 'e' || event.key === 'E')
       manageGame(CLOCKWORK_ROTATION)
-    else if (event.key === 'q')
+    else if (event.key === 'ArrowUp' || event.key === 'x' || event.key === 'X' || event.key === 'q' || event.key === 'Q')
       manageGame(COUNTER_CLOCKWORK_ROTATION)
-    else if (event.key === 'r' && gameManager.username == gameManager.players[0].name) {
+    else if ((event.key === 'r' || event.key === 'R') && gameManager.username == gameManager.players[0].name) {
       manageGame(START)
     }
   };
@@ -73,20 +73,35 @@ function GameBoard({ board, manageGame, gameManager }) {
   /*
   **  return retourne l'affichage.
   */
-  return (
-    <div className="GameBoard">
-      {
-        /*
-        **  map est un fonction d'iteration : permet de retourner tous les elements d'une chaine.
-        **  ici, en precisant qu'on lui appliquera une transformation.
-        **  map retourne (row, i), et j'applique a cela la fonction fleché, donc retourne finalement
-        **  un <Row/>. C'est la facon propre de faire ce que j'ai fait tres salement dans Row.js.
-        */
 
-        board.map((row, i) => <Row row={row} key={i} size={'calc((100vh - 8px) / 20)'}/>)
-      }
-    </div>
-  )
+  if (gameOver && gameOver===true) {
+    console.log("GAMEOVER")
+    return(
+        <div className="GameBoard">
+          <div className="alert">GAME OVER ! </div>
+        {
+                  board.map((row, i) => <Row row={row} key={i} size={'calc((100vh - 8px) / 20)'}/>)
+        }
+      </div>
+     )
+  }
+  else{
+    return (
+      <div className="GameBoard">
+        {
+          /*
+          **  map est un fonction d'iteration : permet de retourner tous les elements d'une chaine.
+          **  ici, en precisant qu'on lui appliquera une transformation.
+          **  map retourne (row, i), et j'applique a cela la fonction fleché, donc retourne finalement
+          **  un <Row/>. C'est la facon propre de faire ce que j'ai fait tres salement dans Row.js.
+          */
+
+          board.map((row, i) => <Row row={row} key={i} size={'calc((100vh - 8px) / 20)'}/>)
+        }
+      </div>
+    )
+
+  }
 }
 
 
