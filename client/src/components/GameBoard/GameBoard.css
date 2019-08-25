@@ -6,7 +6,7 @@
   padding: 2%;
   border:8px solid #000;
   position: absolute;
-  left: 45.5%; 
+  margin-inline-start: 6%; 
   margin-top: 10%;
   background-color: #ce271b;
   color: rgb(235, 220, 220);
