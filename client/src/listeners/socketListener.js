@@ -36,8 +36,9 @@ export default function (dispatch, getState) {
 		getState().manageGame.tetriminos.push(data.piece)
 	});
 
-	socket.on('players', data => {
-		getState().manageGame.players = data
+	socket.on('players', players => {
+    console.log(players)
+		getState().manageGame.players = players
 	});
 
 	socket.on('addRow', data => {

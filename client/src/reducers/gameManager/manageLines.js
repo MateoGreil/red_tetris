@@ -32,7 +32,6 @@ function replaceRow(array, rowNb, newNb) {
   array[rowNb].forEach((element, i) => {
     array[rowNb][i] = newNb
   })
-  console.log(array)
   return array
 }
 
@@ -59,7 +58,6 @@ export default function deleteLines(array, socket, score) {
       }
       array = replaceRow(array, 0, 0)
     }
-  console.log("rows to del = ", rowsToDelete.length, "score = ", score)    
     return ([array, newscore]);
 }
 

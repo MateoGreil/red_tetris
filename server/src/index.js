@@ -25,7 +25,6 @@ function connect(client) {
     return null
   }
   io.to(player.gameName).emit('players', games[player.gameName].players)
-  console.log("Player Number", games[player.gameName].players)
   return player
 }
 
@@ -84,6 +83,12 @@ io.sockets.on('connection', function(client) {
 
     client.on('array', array => {
       player.array = arraySpectrum(array)
+      io.to(player.gameName).emit('players', games[player.gameName].players)
+    })
+
+    client.on('score', score => {
+      player.score = score
+      console.log(games[player.gameName].players)
       io.to(player.gameName).emit('players', games[player.gameName].players)
     })
   }

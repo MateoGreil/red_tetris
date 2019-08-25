@@ -16,7 +16,7 @@ import {connect} from 'react-redux'
 */
 
 const mapStateToProps = state => ({
-    manageGame: state.manageGame
+    players: state.manageGame.players
   })
 
 /*

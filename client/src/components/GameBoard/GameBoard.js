@@ -75,7 +75,6 @@ function GameBoard({ board, manageGame, gameManager, gameOver }) {
   */
 
   if (gameOver && gameOver===true) {
-    console.log("GAMEOVER")
     return(
         <div className="GameBoard">
           <div className="alert">GAME OVER ! </div>
