@@ -23,19 +23,19 @@ function GameBoard({ board, manageGame, gameManager, gameOver }) {
   **  mouvement a produire.
   */
   var handleKeyPress = (event) => {
-    if(event.key === 'd')
+    if(event.key === 'ArrowRight' || event.key === 'd' || event.key === 'D')
       manageGame(RIGHT_TRANSLATION)
-    else if (event.key === 'a')
+    else if (event.key === 'ArrowLeft' || event.key === 'a' || event.key === 'A')
       manageGame(LEFT_TRANSLATION)
-    else if (event.key === 's')
+    else if (event.key === 'ArrowDown' || event.key === 's' || event.key === 'S')
       manageGame(DOWN_TRANSLATION)
     else if (event.key === ' ')
       manageGame(BOTTOM_TRANSLATION)
-    else if (event.key === 'e')
+    else if (event.key === 'c' || event.key === 'C' || event.key === 'e' || event.key === 'E')
       manageGame(CLOCKWORK_ROTATION)
-    else if (event.key === 'q')
+    else if (event.key === 'ArrowUp' || event.key === 'x' || event.key === 'X' || event.key === 'q' || event.key === 'Q')
       manageGame(COUNTER_CLOCKWORK_ROTATION)
-    else if (event.key === 'r' && gameManager.username == gameManager.players[0].name) {
+    else if ((event.key === 'r' || event.key === 'R') && gameManager.username == gameManager.players[0].name) {
       manageGame(START)
     }
   };
