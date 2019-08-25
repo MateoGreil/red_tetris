@@ -86,7 +86,8 @@ const initialState = {
   socket: socket,
   error: null,
   start: false,
-  gameOver: false
+  gameOver: false,
+  score : 0
 }
 
 function start(state) {

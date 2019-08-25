@@ -37,7 +37,6 @@ export default function (dispatch, getState) {
 	});
 
 	socket.on('players', data => {
-		console.log(data)
 		getState().manageGame.players = data
 	});
 

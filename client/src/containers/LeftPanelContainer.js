@@ -11,7 +11,8 @@ const mapStateToProps = state => ({
     players: state.manageGame.players,
     user: state.manageGame.username,
     gameName: state.manageGame.gameName,
-    nextPiece: state.manageGame.tetriminos[1]
+    nextPiece: state.manageGame.tetriminos[1],
+    score: state.manageGame.score
   })
 
 export default connect(

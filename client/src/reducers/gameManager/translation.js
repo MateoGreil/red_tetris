@@ -78,12 +78,16 @@ export function translateDown(state) {
     **  puisque provisionalArray contient la piece en mouvement, mais cette derniere etant au maximum en bas qu'
     **  elle puisse, elle se retrouve donc immobile, figer a jamais dans l'array :)
     */
-    var provisionalArray = deleteLines(state.provisionalArray, socket, state.gameName);
+    let ret = deleteLines(state.provisionalArray, socket, state.score);
+    console.log(ret)
+    let provisionalArray = ret[0] 
+    state.score = ret[1]
     state.tetriminos.shift()
     if (state.tetriminos.length <= 1) {
         socket.emit('askForNewPiece', {})
     }
     socket.emit('array', provisionalArray)
+    console.log("score in translation", state.score)
     return {...state, array: provisionalArray.map(row => row.map(value => {return value})), provisionalArray: provisionalArray}
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import './LeftPanel.css'
 import Shapes from './Shapes/Shapes'
 
-export default function LeftPanel({players, user, gameName, nextPiece}){
+export default function LeftPanel({players, user, gameName, nextPiece, score}){
     return (
     <div className='LeftPanel'>
         <div className='bloc'>
@@ -22,6 +22,9 @@ export default function LeftPanel({players, user, gameName, nextPiece}){
         </div>
         <div className='bloc' style={{heigth:"200px"}}>
             Next Piece :  "{nextPiece ? <Shapes shapes={nextPiece.piece} /> : '' }"
+        </div>
+        <div className='bloc' style={{heigth:"200px"}}>
+            Score :  "{score}"
         </div>
     </div>
     )
