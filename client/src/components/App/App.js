@@ -19,6 +19,8 @@ function MainMenu() {
 
   return (
     <div className='MainMenu'>
+      <div className='Red'>Red</div>
+      <div className='glow'>Tetris</div>
       <form onSubmit={Submit} className='Form'>
         <label>
           username :
@@ -42,7 +44,7 @@ function App({ error }) {
     if (error.nb)
     return (<div>{ error.text }</div>)
   else if (error.nb === 0)
-    return (<MainMenu/>)
+    return (<div className="App"><MainMenu/></div>)
   }
   
   return (
