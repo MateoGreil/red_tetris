@@ -1,5 +1,17 @@
 Piece = require('./Piece')
 
+function isGameOver(player) {
+  if (player.gameOver)
+    return true
+  return false
+}
+
+function isNotGameOver(player) {
+  if (player.gameOver)
+    return false
+  return true
+}
+
 class Game {
 
     constructor(p1) {
@@ -19,12 +31,50 @@ class Game {
 
     start(io) {
       this.playing = true
-      this.sendNewPiece(io)
+      if (!this.players.every(isNotGameOver)) {
+        console.log('restart')
+        this.players.forEach(player => {
+          player.gameOver = false
+          player.array = [
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          ]
+          player.score = 0
+        })
+        io.to(this.name).emit('players', this.players)
+        console.log(this.players)
+        io.to(this.name).emit('restart')
+      }
+      io.to(this.name).emit('newPiece', {piece: new Piece})
+      io.to(this.name).emit('newPiece', {piece: new Piece})
     }
 
     sendNewPiece(io) {
         io.to(this.name).emit('newPiece', {piece: new Piece})
-        io.to(this.name).emit('newPiece', {piece: new Piece})
+    }
+
+    isDone() {
+      if (this.players.every(isGameOver))
+        return true
+      return false
     }
 }
 

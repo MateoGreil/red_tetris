@@ -34,7 +34,7 @@ const {
 **  "state = {...}"" permet d'initialiser les states s'ils ne le sont pas.
 */
 
-const initialState = {
+export const initialState = {
   tetriminos: [],
   array: [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],

@@ -17,7 +17,7 @@ function connect(client) {
     games[player.gameName] = new Game(player);
     client
     console.log("Game " + player.gameName + " is created.");
-  } else if (!games[player.gameName].playing) {
+  } else if (!games[player.gameName].playing || games[player.gameName].isDone()) {
     games[player.gameName].addPlayer(player);
   } else {
     client.emit('gameIsBusy')
