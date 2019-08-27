@@ -6,7 +6,7 @@ export default function LeftPanel({players, user, gameName, nextPiece, score}){
     return (
       <div className='Root'>
       <div className='Red'>Red</div>
-      <div className='glow'>Tetris</div>
+      <div className='Tetris'>Tetris</div>
     <div className='LeftPanel'>
         <div className='bloc'>
             {gameName}

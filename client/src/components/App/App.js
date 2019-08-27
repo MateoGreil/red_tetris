@@ -21,7 +21,7 @@ function MainMenu() {
   return (
     <div className='MainMenu'>
       <div className='Red'>Red</div>
-      <div className='glow'>Tetris</div>
+      <div className='Tetris'>Tetris</div>
       <form onSubmit={Submit} className='Form'>
         <label>
           username :

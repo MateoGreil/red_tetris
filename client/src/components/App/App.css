@@ -1,10 +1,4 @@
 .App {
-  background: #0a0a0a;
-  background: -moz-linear-gradient(top, #0a0a0a 0%, #212121 25%, #3b3b3b 47%, #3b3b3b 53%, #212121 75%, #0a0a0a 100%);
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #0a0a0a), color-stop(25%, #212121), color-stop(47%, #3b3b3b), color-stop(53%, #3b3b3b), color-stop(75%, #212121), color-stop(100%, #0a0a0a));
-  background: -webkit-linear-gradient(top, #0a0a0a 0%, #212121 25%, #3b3b3b 47%, #3b3b3b 53%, #212121 75%, #0a0a0a 100%);
-  background: -o-linear-gradient(top, #0a0a0a 0%, #212121 25%, #3b3b3b 47%, #3b3b3b 53%, #212121 75%, #0a0a0a 100%);
-  background: -ms-linear-gradient(top, #0a0a0a 0%, #212121 25%, #3b3b3b 47%, #3b3b3b 53%, #212121 75%, #0a0a0a 100%);
   background: linear-gradient(to bottom, #0a0a0a 0%, #212121 25%, #3b3b3b 47%, #3b3b3b 53%, #212121 75%, #0a0a0a 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0a0a0a', endColorstr='#0a0a0a', GradientType=0 );
 
@@ -18,14 +12,50 @@
 .Animation {
   height: 200px;
   position: absolute;
-
-  animation: fly 4s infinite;
+  right:100%; top:0px;
+  animation: fly 1.3s;
+  animation-delay: 1s;
+  animation-timing-function: linear;
 }
 
 /* Standard syntax */
 @keyframes fly {
   0%   {right:-230px; top:25%;}
   100% {right:100%; top:0px;}
+}
+
+
+.Red {
+  color: red;
+  font-size: 45px;
+  font-weight: 200;
+}
+
+.Red, .Tetris {
+  text-shadow: 0 -40px 100px #ffcccc, 
+    0 0 2px,
+    0 0 1em #ff4444,
+    0 0 0.5em #ff4444,
+    0 0 0.1em#ff4444,
+    0 10px 3px #000;
+}
+
+.Tetris {
+  font-size: 80px;
+  font-weight: 500;
+  margin-top: -30px;
+  margin-bottom: 50px;
+  color: #fff;
+  /* animation: tetris 4s infinite linear; */
+}
+
+@keyframes tetris {
+  0% {text-shadow: 0px 0px 11px red;}
+  50% {}
+  70% {text-shadow: 0px 0px 11px red;}
+  90% {}
+  95% {text-shadow: 0px 0px 11px red;}
+  100% {}
 }
 
 .MainMenu {
