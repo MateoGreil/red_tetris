@@ -10,7 +10,7 @@ const colors = {
     5: "#DA0000",
     6: "#0000DC",
     7: "#E99B03",
-    8: "#808080"
+    8: ""
 }
 
 //TODO: commenter et modifier ca... c'est dego.

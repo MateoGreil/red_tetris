@@ -25,7 +25,6 @@ function Array({ array, username, gameOver, score }) {
         {
           array.map((row, i) => <Row row={row} key={i} size={'10px'}/>)
         }
-
       <div className='ScoreRightPanel'>
         {score} p 
       </div>
