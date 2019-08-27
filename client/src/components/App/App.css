@@ -1,6 +1,15 @@
 .App {
-  background: black url(./Room.jpg) no-repeat center center fixed;
-  background-size: cover;
+  
+  
+background: #0a0a0a;
+background: -moz-linear-gradient(top, #0a0a0a 0%, #212121 25%, #3b3b3b 47%, #3b3b3b 53%, #212121 75%, #0a0a0a 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, #0a0a0a), color-stop(25%, #212121), color-stop(47%, #3b3b3b), color-stop(53%, #3b3b3b), color-stop(75%, #212121), color-stop(100%, #0a0a0a));
+background: -webkit-linear-gradient(top, #0a0a0a 0%, #212121 25%, #3b3b3b 47%, #3b3b3b 53%, #212121 75%, #0a0a0a 100%);
+background: -o-linear-gradient(top, #0a0a0a 0%, #212121 25%, #3b3b3b 47%, #3b3b3b 53%, #212121 75%, #0a0a0a 100%);
+background: -ms-linear-gradient(top, #0a0a0a 0%, #212121 25%, #3b3b3b 47%, #3b3b3b 53%, #212121 75%, #0a0a0a 100%);
+background: linear-gradient(to bottom, #0a0a0a 0%, #212121 25%, #3b3b3b 47%, #3b3b3b 53%, #212121 75%, #0a0a0a 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0a0a0a', endColorstr='#0a0a0a', GradientType=0 );
+
   display: flex;
   align-items: center;
   justify-content: space-around;

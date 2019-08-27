@@ -4,6 +4,9 @@ import Shapes from './Shapes/Shapes'
 
 export default function LeftPanel({players, user, gameName, nextPiece, score}){
     return (
+      <div className='Root'>
+      <div className='Red'>Red</div>
+      <div className='glow'>Tetris</div>
     <div className='LeftPanel'>
         <div className='bloc'>
             {gameName}
@@ -25,11 +28,12 @@ export default function LeftPanel({players, user, gameName, nextPiece, score}){
         </div>
         <div className='bloc' 
             style={
-                {backgroundColor: 'hsla(204, 82%, 37%, 0.822)', fontSize: '25px', color:'white', textAlign:'center',
+                {backgroundColor: 'hsl(0, 100%, 40%)', fontSize: '25px', color:'white', textAlign:'center',
             fontWeight:'bolder'}
             }>
             Score : {score} 
         </div>
+    </div>
     </div>
     )
 }

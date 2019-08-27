@@ -20,7 +20,7 @@ function Array({ array, username, gameOver, score }) {
   }
   
   return (
-      <div className='ArrayAndUsername' style={{backgroundColor: 'hsla(204, 80%, 77%, 0.822)'}}>
+      <div className='ArrayAndUsername' style={{backgroundColor: 'hsl(128, 100%, 27%)'}}>
         {username}
         {
           array.map((row, i) => <Row row={row} key={i} size={'10px'}/>)
