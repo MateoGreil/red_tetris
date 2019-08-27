@@ -4,6 +4,7 @@ import './App.css'
 import GameBoardContainer from '../../containers/GameBoardContainer'
 import LeftPanelContainer from '../../containers/LeftPanelContainer';
 import RightPanelContainer from '../../containers/RightPanelContainer';
+import pelican from '../../img/pelican.png'
 
 
 
@@ -44,7 +45,13 @@ function App({ error }) {
     if (error.nb)
     return (<div>{ error.text }</div>)
   else if (error.nb === 0)
-    return (<div className="App"><MainMenu/></div>)
+    return (
+    <div>
+      <img src={pelican} className="Animation"/>
+      <div className="App">
+        <MainMenu/>
+      </div>
+    </div>)
   }
   
   return (
