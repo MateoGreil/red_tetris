@@ -4,6 +4,19 @@ import putPieceInGame from './putPieceInGame'
 import reorganizeLines  from './manageLines'
 import deleteLines  from './manageLines'
 import {socket} from '../../listeners/socketListener'
+const {
+  CONNECTION,
+  DISCONNECT,
+
+  START,
+  RESTART,
+  GAMEOVER,
+
+  NEW_PIECE,
+  ADD_ROW,
+  ARRAY,
+  SCORE
+} = require('../../../common/eventSocket')
 
 /*
 **  fonction deplacement de la piece vers la droite
@@ -68,7 +81,7 @@ export function translateDown(state) {
         return {...state, provisionalArray: putPieceInGame(state.array.map(row => row.map(value => {return value})), tetrimino)};
     }
     else if (check === 2){
-        socket.emit('gameOver', {})
+        socket.emit(GAMEOVER, {})
         state.gameOver = true
     }
     else{
@@ -83,12 +96,12 @@ export function translateDown(state) {
     */
    let [provisionalArray, score] = deleteLines(state.provisionalArray, socket, state.score);
     state.score = score
-    socket.emit('score', score)
+    socket.emit(SCORE, score)
     state.tetriminos.shift()
     if (state.tetriminos.length <= 1) {
-        socket.emit('askForNewPiece', {})
+        socket.emit(NEW_PIECE, {})
     }
-    socket.emit('array', provisionalArray)
+    socket.emit(ARRAY, provisionalArray)
     return {...state, array: provisionalArray.map(row => row.map(value => {return value})), provisionalArray: provisionalArray}
 }
 

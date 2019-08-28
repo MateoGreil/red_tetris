@@ -28,6 +28,7 @@ const {
   START,
   ADD_ROW
 } = Options
+const eventSocket = require('../../../common/eventSocket')
 
 /*
 **  move est mon reducer, c'est ce dernier qui sera appelé par la fonction dispatch.
@@ -91,7 +92,7 @@ export const initialState = {
 }
 
 function start(state) {
-  state.socket.emit('start')
+  state.socket.emit(eventSocket.START)
   return {...state, start: true}
 }
 

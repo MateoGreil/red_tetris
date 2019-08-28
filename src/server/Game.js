@@ -1,4 +1,19 @@
 Piece = require('./Piece')
+const {
+  CONNECTION,
+  DISCONNECT,
+
+  START,
+  RESTART,
+  GAMEOVER,
+
+  PLAYERS,
+
+  NEW_PIECE,
+  ADD_ROW,
+  ARRAY,
+  SCORE
+} = require('../common/eventSocket')
 
 function isGameOver(player) {
   if (player.gameOver)
@@ -32,7 +47,7 @@ class Game {
     start(io) {
       this.playing = true
       if (!this.players.every(isNotGameOver)) {
-        console.log('restart')
+        console.log(RESTART)
         this.players.forEach(player => {
           player.gameOver = false
           player.array = [
@@ -59,16 +74,16 @@ class Game {
           ]
           player.score = 0
         })
-        io.to(this.name).emit('players', this.players)
+        io.to(this.name).emit(PLAYERS, this.players)
         console.log(this.players)
-        io.to(this.name).emit('restart')
+        io.to(this.name).emit(RESTART)
       }
-      io.to(this.name).emit('newPiece', {piece: new Piece})
-      io.to(this.name).emit('newPiece', {piece: new Piece})
+      io.to(this.name).emit(NEW_PIECE, {piece: new Piece})
+      io.to(this.name).emit(NEW_PIECE, {piece: new Piece})
     }
 
     sendNewPiece(io) {
-        io.to(this.name).emit('newPiece', {piece: new Piece})
+        io.to(this.name).emit(NEW_PIECE, {piece: new Piece})
     }
 
     isDone() {

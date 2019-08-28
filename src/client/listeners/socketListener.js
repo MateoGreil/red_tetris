@@ -7,6 +7,7 @@ import initialState from '../reducers/gameManager/manageGame'
 const {
 	ADD_ROW
 } = Options
+const eventSocket = require('../../common/eventSocket')
 
 const SERVER_ADDRESS = 'localhost:8000'
 
@@ -33,21 +34,21 @@ export const socket = io.connect(SERVER_ADDRESS, {query: {
 
 export default function (dispatch, getState) {
 
-	socket.on('newPiece', data => {
+	socket.on(eventSocket.NEW_PIECE, data => {
 		getState().manageGame.tetriminos.push(data.piece)
 	});
 
-	socket.on('players', players => {
+	socket.on(eventSocket.PLAYERS, players => {
 		getState().manageGame.players = players
 	});
 
-	socket.on('addRow', data => {
+	socket.on(eventSocket.ADD_ROW, data => {
 		for (let i = 0; i < data; i++) {
 			dispatch(manageGame(ADD_ROW))
 		}
   })
   
-  socket.on('restart', () => {
+  socket.on(eventSocket.RESTART, () => {
     getState().manageGame.array = [
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],

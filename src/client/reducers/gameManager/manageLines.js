@@ -1,3 +1,17 @@
+const {
+  CONNECTION,
+  DISCONNECT,
+
+  START,
+  RESTART,
+  GAMEOVER,
+
+  NEW_PIECE,
+  ADD_ROW,
+  ARRAY,
+  SCORE
+} = require('../../../common/eventSocket')
+
 /*
 ** Module to check if the rows are full, delete them if it is the case,
 ** and then reorganize the array.
@@ -50,7 +64,7 @@ export default function deleteLines(array, socket, score) {
     let rowsToDelete = checkLines(array);
     let newscore = changeScore(score, rowsToDelete.length)
     if (rowsToDelete.length > 1) {
-      socket.emit('addRowToAdvers', rowsToDelete.length - 1)
+      socket.emit(ADD_ROW, rowsToDelete.length - 1)
     }
     for (var i = 0; i < rowsToDelete.length; i++) {
       for (var row = rowsToDelete[i]; row > 1; row--) {

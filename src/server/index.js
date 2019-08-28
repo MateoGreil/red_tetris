@@ -4,6 +4,22 @@ const Piece = require('./Piece')
 var http = require('http');
 var server = http.createServer();
 var io = require('socket.io').listen(server);
+const {
+  CONNECTION,
+  DISCONNECT,
+
+  START,
+  RESTART,
+  GAMEOVER,
+  GAME_BUSY,
+
+  PLAYERS,
+
+  NEW_PIECE,
+  ADD_ROW,
+  ARRAY,
+  SCORE
+} = require('../common/eventSocket')
 
 var games = [];
 
@@ -20,11 +36,11 @@ function connect(client) {
   } else if (!games[player.gameName].playing || games[player.gameName].isDone()) {
     games[player.gameName].addPlayer(player);
   } else {
-    client.emit('gameIsBusy')
+    client.emit(GAME_BUSY)
     console.log('gameIsBusy for ' + player.name + ' in ' + player.gameName)
     return null
   }
-  io.to(player.gameName).emit('players', games[player.gameName].players)
+  io.to(player.gameName).emit(PLAYERS, games[player.gameName].players)
   return player
 }
 
@@ -35,7 +51,7 @@ function disconnect(player) {
     games[player.gameName] = null;
     console.log("Game " + player.gameName + " is removed.");
   } else {
-    io.to(player.gameName).emit('players', games[player.gameName].players)
+    io.to(player.gameName).emit(PLAYERS, games[player.gameName].players)
   }
 }
 
@@ -55,41 +71,41 @@ function arraySpectrum(array) {
 }
 
 //connexion au client
-io.sockets.on('connection', function(client) {
+io.sockets.on(CONNECTION, function(client) {
   //console.log('connection: ', client)
   let player = connect(client)
   if (player) {
-    client.on('disconnect', () => {
+    client.on(DISCONNECT, () => {
       client.leave(player.gameName)
       disconnect(player)
     });
 
-    client.on('start', () => {
+    client.on(START, () => {
       games[player.gameName].start(io)
     })
 
-    client.on('askForNewPiece', () => {
+    client.on(NEW_PIECE, () => {
       games[player.gameName].sendNewPiece(io)
     })
 
-    client.on('addRowToAdvers', (nbOfRowToAdd) => {
-      client.broadcast.to(player.gameName).emit('addRow', nbOfRowToAdd)
+    client.on(ADD_ROW, (nbOfRowToAdd) => {
+      client.broadcast.to(player.gameName).emit(ADD_ROW, nbOfRowToAdd)
     })
 
-    client.on('gameOver', () => {
+    client.on(GAMEOVER, () => {
       player.gameOver = true
-      io.to(player.gameName).emit('players', games[player.gameName].players)
+      io.to(player.gameName).emit(PLAYERS, games[player.gameName].players)
     })
 
-    client.on('array', array => {
+    client.on(ARRAY, array => {
       player.array = arraySpectrum(array)
-      io.to(player.gameName).emit('players', games[player.gameName].players)
+      io.to(player.gameName).emit(PLAYERS, games[player.gameName].players)
     })
 
-    client.on('score', score => {
+    client.on(SCORE, score => {
       player.score = score
       console.log(games[player.gameName].players)
-      io.to(player.gameName).emit('players', games[player.gameName].players)
+      io.to(player.gameName).emit(PLAYERS, games[player.gameName].players)
     })
   }
 
