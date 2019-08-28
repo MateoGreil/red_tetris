@@ -3,28 +3,17 @@ version: '2'
 
 services:
 
-  server:
-    image: "mgreil/red_tetris_server"
-    restart: always
-    ports:
-      - "8000:8000"
-    networks:
-      - "web_network"
-    build: ./server
-    volumes:
-      - ./server/src:/opt/red_tetris/server/src
-
-  client:
-    image: "mgreil/red_tetris_client"
+  red_tetris:
+    image: "mgreil/red_tetris"
     restart: always
     ports:
       - "3000:3000"
+      - "8000:8000"
     networks:
       - "web_network"
-    build: ./client
+    build: ./
     volumes:
-      - ./client/public:/opt/red_tetris/client/public
-      - ./client/src:/opt/red_tetris/client/src
+      - ./src:/opt/red_tetris/src
 
 networks:
   web_network:
