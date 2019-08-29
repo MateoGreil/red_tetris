@@ -47,7 +47,9 @@ export const initialState = {
   error: null,
   start: false,
   gameOver: false,
-  score : 0
+  score : 0,
+  date: 0,
+  timer: 0
 }
 
 function start(state) {
@@ -55,8 +57,27 @@ function start(state) {
   return {...state, start: true}
 }
 
+function startTimer(state, date){
+  let newDate = new Date
+  let newHour = newDate.getHours()
+  let newMinutes = newDate.getMinutes()
+  let newSecs = newDate.getSeconds()
+  
+  
+  let diff = [newHour - date[1], newMinutes - date[2], newSecs - date[3]]    
+  let inSec = diff[0] * 3600 + diff[1] * 60 + diff [2]
+  let min = Math.floor(inSec/60)+"";
+    while (min.length < 2) min = "0" + min;
+  let sec = inSec%60+"";
+    while (sec.length < 2) sec = "0" + sec;
+  let timer = [min," : ",sec]
+  return(timer)
+}
+
 export default function manageGame(state = initialState, action) {
   if (state.tetriminos[0] && state.gameOver === false) {
+    if (state.date)
+      state.timer = startTimer(state, state.date)
     switch (action.type) {
       case GAME_MANAGER:
         switch(action.option) {

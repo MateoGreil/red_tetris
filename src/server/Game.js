@@ -76,8 +76,8 @@ class Game {
         })
         io.to(this.name).emit(PLAYERS, this.players)
         console.log(this.players)
-        io.to(this.name).emit(RESTART)
       }
+      io.to(this.name).emit(RESTART)
       io.to(this.name).emit(NEW_PIECE, {piece: new Piece})
       io.to(this.name).emit(NEW_PIECE, {piece: new Piece})
     }

@@ -97,6 +97,7 @@ export default function (dispatch, getState) {
     getState().manageGame.score = 0
     getState().manageGame.gameOver = false
     getState().manageGame.start = true
+    getState().manageGame.date = [new Date().getDate(), new Date().getHours(), new Date().getMinutes(), new Date().getSeconds()]
     console.log(getState().manageGame)
   })
 
