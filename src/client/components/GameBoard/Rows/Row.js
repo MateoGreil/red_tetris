@@ -14,16 +14,11 @@ const colors = {
 }
 
 //TODO: commenter et modifier ca... c'est dego.
-function Row(props) {
-    var row = props.row
-    var uiRow = [];
+function Row({ row, size }) {
 
-    for (var i = 0; i < 10; i++) {
-        uiRow.push(<div style={{backgroundColor: colors[row[i]], height: props.size, width: props.size}}/>)
-    }
     return (
         <div className="Row">
-            {uiRow}
+            {row.map((square, i) => <div key={i} style={{backgroundColor: colors[square], height: size, width: size}}/>)}
         </div>
     );
 }

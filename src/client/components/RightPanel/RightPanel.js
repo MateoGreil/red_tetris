@@ -35,7 +35,7 @@ function Array({ array, username, gameOver, score }) {
 export default function RightPanel({ players }) {
     return (
     <div className={'RightPanel'}> 
-        {players.map(player => <Array array={player.array} username={player.name} gameOver={player.gameOver} score={player.score}/>)}
+        {players.map((player, i) => <Array key={i} array={player.array} username={player.name} gameOver={player.gameOver} score={player.score}/>)}
     </div>
     )
 }
